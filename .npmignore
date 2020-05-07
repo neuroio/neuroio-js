@@ -1,0 +1,17 @@
+/.idea/
+/.vscode/
+/.git/
+
+/node_modules/
+/docs/
+
+.npmignore
+.gitignore
+
+webpack.config.js
+babel.config.js
+.eslintrc.js
+.env
+
+.prettierrc
+.prettierignore

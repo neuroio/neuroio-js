@@ -1,0 +1,109 @@
+# User tokens API reference
+
+## Neuroio API references
+
+[Neuroio API](https://kb.neuroio.com/#/authorization)
+
+!> Note that parameters documentation available on the links to Neuroio API references below.
+
+## Generate token
+
+[Neuroio API](https://kb.neuroio.com/#/authorization?id=token-generation)
+
+```js
+import { createNeuroioRestApi } from "@neuroio/api";
+
+const NeuroioRestApi = createNeuroioRestApi({
+  version: 1,
+  token: NEUROIO_TOKEN,
+});
+
+const token = NeuroioRestApi.auth.generateToken();
+
+token.then(token => {
+  console.log({ token });
+});
+```
+
+## Generate permanent token
+
+[Neuroio API](https://kb.neuroio.com/#/authorization?id=token-generation)
+
+```js
+import { createNeuroioRestApi } from "@neuroio/api";
+
+const NeuroioRestApi = createNeuroioRestApi({
+  version: 1,
+  token: NEUROIO_TOKEN,
+});
+
+const permanentToken = NeuroioRestApi.auth.generatePermanentToken();
+
+permanentToken.then(permanentToken => {
+  console.log({ permanentToken });
+});
+```
+
+## Activate/Deactivate token
+
+[Neuroio API](https://kb.neuroio.com/#/authorization?id=token-deactivationactivation)
+
+```js
+import { createNeuroioRestApi } from "@neuroio/api";
+
+const NeuroioRestApi = createNeuroioRestApi({
+  version: 1,
+  token: NEUROIO_TOKEN,
+});
+
+const tokenId = 1;
+
+const token = NeuroioRestApi.users.updateToken({
+  id: tokenId,
+  isActive: false,
+});
+
+token.then(token => {
+  console.log({ token });
+});
+```
+
+## Delete user token
+
+[Neuroio API](https://kb.neuroio.com/#/authorization?id=deleting-a-token)
+
+```js
+import { createNeuroioRestApi } from "@neuroio/api";
+
+const NeuroioRestApi = createNeuroioRestApi({
+  version: 1,
+  token: NEUROIO_TOKEN,
+});
+
+const tokenId = 1;
+
+const token = NeuroioRestApi.users.deleteToken(tokenId);
+
+token.then(() => {
+  console.log("Token was deleted!");
+});
+```
+
+## Delete user tokens
+
+[Neuroio API](https://kb.neuroio.com/#/authorization?id=deleting-all-users-tokens)
+
+```js
+import { createNeuroioRestApi } from "@neuroio/api";
+
+const NeuroioRestApi = createNeuroioRestApi({
+  version: 1,
+  token: NEUROIO_TOKEN,
+});
+
+const tokens = NeuroioRestApi.users.deleteToken({ permanent: true });
+
+tokens.then(() => {
+  console.log("All permanent tokens were deleted!");
+});
+```

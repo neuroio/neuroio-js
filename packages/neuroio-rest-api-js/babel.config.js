@@ -1,0 +1,16 @@
+/**
+ * uses for jest
+ */
+
+module.exports = {
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        targets: {
+          node: "current",
+        },
+      },
+    ],
+  ],
+};
