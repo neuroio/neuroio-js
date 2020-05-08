@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "NODE_ENV=production webpack",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && npm run test",
+    "test": "npm test --prefix packages/neuroio-rest-api && npm test --prefix packages/neuroio-websocket",
     "docs:serve": "docsify serve ./docs"
   },
   "keywords": [
@@ -35,6 +36,8 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-jest": "^23.9.0",
     "eslint-plugin-prettier": "^3.1.3",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.2",
     "parallel-webpack": "^2.6.0",
     "prettier": "^2.0.5",
     "webpack": "^4.43.0",
