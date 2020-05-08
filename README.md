@@ -1,5 +1,7 @@
 # Neuroio API JS library
 
+[![Build Status](https://travis-ci.com/neuroio/neuroio-js.svg?branch=master)](https://travis-ci.com/neuroio/neuroio-js)
+
 ## Installation
 
 ### NPM
