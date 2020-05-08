@@ -8,6 +8,7 @@
     "./dist/NeuroioApi.node.js": "./dist/NeuroioApi.web.js"
   },
   "scripts": {
+    "install:all": "npm-recursive-install",
     "build": "NODE_ENV=production webpack",
     "prepublishOnly": "npm run build && npm run test",
     "test": "npm test --prefix packages/neuroio-rest-api && npm test --prefix packages/neuroio-websocket",
@@ -40,6 +41,7 @@
     "lint-staged": "^10.2.2",
     "parallel-webpack": "^2.6.0",
     "prettier": "^2.0.5",
+    "recursive-install": "^1.4.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },

@@ -2,16 +2,27 @@
 /.vscode/
 /.git/
 
+.env
+
 /node_modules/
+.package-lock.json
+
+.github
 /docs/
+/examples/
 
 .npmignore
 .gitignore
 
 webpack.config.js
 babel.config.js
+
 .eslintrc.js
-.env
+.eslintignore
 
 .prettierrc
 .prettierignore
+
+.travis.yml
+.huskyrc.json
+.lintstagedrc
