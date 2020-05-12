@@ -20,7 +20,7 @@
     "query"
   ],
   "dependencies": {
-    "@neuroio/rest-api": "^1.0.0-beta.4",
+    "@neuroio/rest-api": "^1.0.0-beta.5",
     "@neuroio/websocket": "^1.0.0-beta.1"
   },
   "devDependencies": {
