@@ -1,6 +1,6 @@
 # Neuroio API JS library
 
-[![Build Status](https://travis-ci.com/neuroio/neuroio-js.svg?branch=master)](https://travis-ci.com/neuroio/neuroio-js)
+![Node.js CI](https://github.com/neuroio/neuroio-js/workflows/Node.js%20CI/badge.svg)
 
 ## Installation
 
