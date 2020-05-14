@@ -8,10 +8,14 @@
     "./dist/NeuroioApi.node.js": "./dist/NeuroioApi.web.js"
   },
   "scripts": {
-    "install:all": "npm-recursive-install",
     "build": "NODE_ENV=production webpack",
     "prepublishOnly": "npm run build && npm run test",
-    "test": "npm test --prefix packages/neuroio-rest-api && npm test --prefix packages/neuroio-websocket",
+    "lint": "eslint src",
+    "prettier": "prettier \"**/*.+(js|jsx|json)\"",
+    "format": "npm run prettier -- --write",
+    "ci:all": "npm ci --prefix packages/neuroio-rest-api && npm ci --prefix packages/neuroio-websocket && npm ci",
+    "test:all": "npm test --prefix packages/neuroio-rest-api && npm test --prefix packages/neuroio-websocket",
+    "validate": "npm run lint && npm run test:all && npm run prettier -- --list-different",
     "docs:serve": "docsify serve ./docs"
   },
   "keywords": [
