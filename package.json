@@ -25,7 +25,7 @@
   ],
   "dependencies": {
     "@neuroio/rest-api": "^1.0.0",
-    "@neuroio/websocket": "^1.0.0-beta.1"
+    "@neuroio/websocket": "^1.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
