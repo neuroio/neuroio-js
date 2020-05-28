@@ -332,11 +332,11 @@ describe("NeuroioApi test", () => {
     });
 
     test("deletePerson: should send DELETE request with correct URL", () => {
-      const personId = 42;
+      const pid = 42;
 
-      api.persons.deletePerson(personId).then(thenFn);
+      api.persons.deletePerson(pid).then(thenFn);
 
-      expect(axios.delete).toHaveBeenCalledWith(`persons/${personId}/`);
+      expect(axios.delete).toHaveBeenCalledWith(`persons/${pid}/`);
     });
 
     test("reinitializePersonByEntry: should send POST request with correct data", () => {
@@ -350,10 +350,10 @@ describe("NeuroioApi test", () => {
     });
 
     test("reinitializePersonByImage: should send POST request with correct data", () => {
-      const personId = 1;
+      const pid = 1;
 
       const personData = {
-        personId,
+        pid,
         photo: mockedFile,
         source: "webcam",
         facesize: 10,
@@ -372,7 +372,7 @@ describe("NeuroioApi test", () => {
 
       api.persons.reinitializePersonByImage(personData).then(thenFn);
 
-      expect(axios.post).toHaveBeenCalledWith(`persons/reinit/${personId}`, {
+      expect(axios.post).toHaveBeenCalledWith(`persons/reinit/${pid}`, {
         _data: expectedData,
       });
 
@@ -430,13 +430,11 @@ describe("NeuroioApi test", () => {
     });
 
     test("getEntriesStatsByPersonId: should return correct object with stats of a person", () => {
-      const personId = 1;
+      const pid = 1;
 
-      api.entries.getEntriesStatsByPersonId(personId).then(thenFn);
+      api.entries.getEntriesStatsByPersonId(pid).then(thenFn);
 
-      expect(axios.get).toHaveBeenCalledWith(
-        `entries/stats/idxid/${personId}/`
-      );
+      expect(axios.get).toHaveBeenCalledWith(`entries/stats/pid/${pid}/`);
 
       axios.mockResponse({ data: mockedEntry });
 

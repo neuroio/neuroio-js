@@ -50,7 +50,7 @@ export interface FindOutCustomerParamsInterface {
 }
 
 export interface FindOutCustomerResponseInterface {
-  idxid: string;
+  pid: string;
 }
 
 export interface GetApiVersionResponseInterface {
