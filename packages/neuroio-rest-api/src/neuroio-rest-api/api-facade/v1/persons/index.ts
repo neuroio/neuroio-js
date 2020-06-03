@@ -2,7 +2,7 @@ import { id, Result, Sex, Mood } from "../../../../base/types";
 
 export interface PersonResponseIterface {
   result: Result;
-  idxid: string;
+  pid: string;
   age: number;
   sex: Sex;
   mood: Mood;
@@ -33,7 +33,7 @@ export interface ReinitializePersonByEntryParamsInterface {
 }
 
 export interface ReinitializePersonByImageParamsInterface {
-  personId: string;
+  pid: string;
   photo: File;
   source: string;
   facesize?: number;
@@ -51,7 +51,7 @@ export interface PersonsInterface {
   createPersonFromEntry(
     person: CreatePersonFromEntryParamsInterface
   ): Promise<{}>;
-  deletePerson(personId: string): Promise<{}>;
+  deletePerson(pid: string): Promise<{}>;
   reinitializePersonByEntry(
     params: ReinitializePersonByEntryParamsInterface
   ): Promise<{}>;

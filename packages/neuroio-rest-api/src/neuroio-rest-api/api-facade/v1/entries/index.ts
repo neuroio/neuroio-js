@@ -9,7 +9,7 @@ import {
 } from "../../../../base/types";
 
 export interface EntriesFiltersInterface extends Paginatable, Searchable {
-  idxid?: string;
+  pid?: string;
   source?: string;
 
   result?: Array<Result>;
@@ -28,6 +28,6 @@ export interface EntriesFiltersInterface extends Paginatable, Searchable {
 
 export interface EntriesInterface {
   getEntries(filters: EntriesFiltersInterface): Promise<{}>;
-  getEntriesStatsByPersonId(personId: string): Promise<{}>;
+  getEntriesStatsByPersonId(pid: string): Promise<{}>;
   deleteEntry(entryId: id): Promise<{}>;
 }

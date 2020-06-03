@@ -14,12 +14,12 @@ const personsGroups = NeuroioRestApi.personsGroups.getPersonsGroups({
   q: "some search query here",
   limit: 20,
   offset: 0,
-  idxids_include: ["749c9583-5ae9-4b72-a8f9-e1018d99af7e"],
-  idxids_exclude: ["98aff267-93ed-449b-9124-d4d99c4c8400"],
+  pids_include: ["749c9583-5ae9-4b72-a8f9-e1018d99af7e"],
+  pids_exclude: ["98aff267-93ed-449b-9124-d4d99c4c8400"],
   groups_ids: [2, 7],
 });
 
-personsGroups.then(personsGroups => {
+personsGroups.then((personsGroups) => {
   console.log({ personsGroups });
 });
 ```
@@ -40,7 +40,7 @@ const personsGroup = NeuroioRestApi.personsGroups.getPersonsGroup(
   personsGroupId
 );
 
-personsGroup.then(personsGroup => {
+personsGroup.then((personsGroup) => {
   console.log({ personsGroup });
 });
 ```
@@ -59,7 +59,7 @@ const personsGroup = NeuroioRestApi.personsGroups.createPersonsGroup({
   name: "example_persons_group",
 });
 
-personsGroup.then(personsGroup => {
+personsGroup.then((personsGroup) => {
   console.log({ personsGroup });
 });
 ```
@@ -114,14 +114,14 @@ const personsGroupId = 1;
 const personsGroupPersons = NeuroioRestApi.personsGroups.getPersonsGroupPersons(
   {
     groupId: personsGroupId,
-    idxids: [
+    pids: [
       "98aff267-93ed-449b-9124-d4d99c4c8400",
       "7d6ff12f-83a0-46ab-86f7-181558398bb2",
     ],
   }
 );
 
-personsGroupPersons.then(personsGroupPersons => {
+personsGroupPersons.then((personsGroupPersons) => {
   console.log({ personsGroupPersons });
 });
 ```

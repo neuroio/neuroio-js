@@ -23,15 +23,15 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
       limit,
       offset,
       groups_ids,
-      idxids_include,
-      idxids_exclude,
+      pids_include,
+      pids_exclude,
     }: GetPersonsGroupsFiltersInterface = {}): {} => ({
       q,
       limit,
       offset,
       groups_ids,
-      idxids_include,
-      idxids_exclude,
+      pids_include,
+      pids_exclude,
     });
 
     return this.httpClient.get(
@@ -75,15 +75,15 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
     const getFiltersData = ({
       limit,
       offset,
-      idxids,
+      pids,
     }: GetPersonsGroupPersonsFiltersInterface = {}): {} => ({
       limit,
       offset,
-      idxids,
+      pids,
     });
 
     return this.httpClient.get(
-      `${PersonsGroups.apiEndpoint}${groupId}/idxids/`,
+      `${PersonsGroups.apiEndpoint}${groupId}/pids/`,
       getFiltersData(filters)
     );
   }
@@ -92,9 +92,9 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
     groupsIds,
     persons,
   }: AddPersonsToPersonsGroupsParamsInterface = {}): Promise<{}> {
-    return this.httpClient.post(`${PersonsGroups.apiEndpoint}idxids/`, {
+    return this.httpClient.post(`${PersonsGroups.apiEndpoint}pids/`, {
       groups_ids: groupsIds,
-      idxids: persons,
+      pids: persons,
     });
   }
 
@@ -102,9 +102,9 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
     groupsIds,
     persons,
   }: RemovePersonsFromPersonsGroupsParamsInterface = {}): Promise<{}> {
-    return this.httpClient.delete(`${PersonsGroups.apiEndpoint}idxids/`, null, {
+    return this.httpClient.delete(`${PersonsGroups.apiEndpoint}pids/`, null, {
       groups_ids: groupsIds,
-      idxids: persons,
+      pids: persons,
     });
   }
 }
