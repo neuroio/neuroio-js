@@ -64,8 +64,8 @@ class Persons extends Api implements PersonsInterface {
     });
   }
 
-  deletePerson(idxid: string): Promise<{}> {
-    return this.httpClient.delete(`${Persons.apiEndpoint}${idxid}/`);
+  deletePerson(pid: string): Promise<{}> {
+    return this.httpClient.delete(`${Persons.apiEndpoint}${pid}/`);
   }
 
   reinitializePersonByEntry({
@@ -79,7 +79,7 @@ class Persons extends Api implements PersonsInterface {
   }
 
   reinitializePersonByImage({
-    personId,
+    pid,
     photo,
     source,
     facesize,
@@ -93,10 +93,7 @@ class Persons extends Api implements PersonsInterface {
     addFileToFormData(data, photo, "photo");
     addDataToFormData(data, fieldsData);
 
-    return this.httpClient.post(
-      `${Persons.apiEndpoint}reinit/${personId}`,
-      data
-    );
+    return this.httpClient.post(`${Persons.apiEndpoint}reinit/${pid}`, data);
   }
 }
 

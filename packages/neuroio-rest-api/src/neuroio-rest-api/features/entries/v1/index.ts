@@ -11,7 +11,7 @@ class Entries extends Api implements EntriesInterface {
 
   getEntries(filters: EntriesFiltersInterface = {}): Promise<{}> {
     const getFiltersData = ({
-      idxid,
+      pid,
       result,
       liveness,
       source,
@@ -25,7 +25,7 @@ class Entries extends Api implements EntriesInterface {
       age_from,
       age_to,
     }: EntriesFiltersInterface): {} => ({
-      idxid,
+      pid,
       result,
       liveness,
       source,
@@ -43,10 +43,8 @@ class Entries extends Api implements EntriesInterface {
     return this.httpClient.get(Entries.apiEndpoint, getFiltersData(filters));
   }
 
-  getEntriesStatsByPersonId(personId: string): Promise<{}> {
-    return this.httpClient.get(
-      `${Entries.apiEndpoint}stats/idxid/${personId}/`
-    );
+  getEntriesStatsByPersonId(pid: string): Promise<{}> {
+    return this.httpClient.get(`${Entries.apiEndpoint}stats/pid/${pid}/`);
   }
 
   deleteEntry(entryId: id): Promise<{}> {

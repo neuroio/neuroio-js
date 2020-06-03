@@ -1,6 +1,6 @@
 {
   "name": "@neuroio/api",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Library for work with Neuroio API",
   "source": "index.js",
   "main": "./dist/NeuroioApi.node.js",
@@ -24,7 +24,7 @@
     "query"
   ],
   "dependencies": {
-    "@neuroio/rest-api": "^1.0.0",
+    "@neuroio/rest-api": "^2.0.0",
     "@neuroio/websocket": "^1.0.0"
   },
   "devDependencies": {

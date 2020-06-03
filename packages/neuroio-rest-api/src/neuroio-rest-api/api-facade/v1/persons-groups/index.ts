@@ -4,8 +4,8 @@ export interface GetPersonsGroupsFiltersInterface
   extends Paginatable,
     Searchable {
   groups_ids?: Array<id>;
-  idxids_include?: Array<string>;
-  idxids_exclude?: Array<string>;
+  pids_include?: Array<string>;
+  pids_exclude?: Array<string>;
 }
 
 export interface PersonsGroupInterface {
@@ -16,7 +16,7 @@ export interface PersonsGroupInterface {
 
 export interface GetPersonsGroupPersonsFiltersInterface extends Paginatable {
   groupId?: id;
-  idxids?: Array<string>;
+  pids?: Array<string>;
 }
 
 export interface AddPersonsToPersonsGroupsParamsInterface {

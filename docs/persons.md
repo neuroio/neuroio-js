@@ -27,7 +27,7 @@ const person = NeuroioRestApi.persons.createPerson({
   identify_asm: true,
 });
 
-person.then(person => {
+person.then((person) => {
   console.log({ person });
 });
 ```
@@ -50,7 +50,7 @@ const person = NeuroioRestApi.persons.createPersonFromEntry({
   create_on_junk: false,
 });
 
-person.then(person => {
+person.then((person) => {
   console.log({ person });
 });
 ```
@@ -67,9 +67,9 @@ const NeuroioRestApi = createNeuroioRestApi({
   token: NEUROIO_TOKEN,
 });
 
-const personId = 1;
+const pid = 1;
 
-const person = NeuroioRestApi.persons.deletePerson(personId);
+const person = NeuroioRestApi.persons.deletePerson(pid);
 
 person.then(() => {
   console.log("Person was deleted!");
@@ -93,7 +93,7 @@ const person = NeuroioRestApi.persons.searchPersonByImage({
   identify_asm: true,
 });
 
-person.then(person => {
+person.then((person) => {
   console.log({ person });
 });
 ```
@@ -116,7 +116,7 @@ const person = NeuroioRestApi.persons.reinitializePersonByEntry({
   entryId,
 });
 
-person.then(person => {
+person.then((person) => {
   console.log({ person });
 });
 ```
@@ -133,17 +133,17 @@ const NeuroioRestApi = createNeuroioRestApi({
   token: NEUROIO_TOKEN,
 });
 
-const personId = 1;
+const pid = 1;
 
 const person = NeuroioRestApi.persons.reinitializePersonByImage({
-  personId,
+  pid,
   photo: "dataURIPhoto",
   source: "webcam",
   facesize: 100,
   result: "ha",
 });
 
-person.then(person => {
+person.then((person) => {
   console.log({ person });
 });
 ```
