@@ -15,22 +15,22 @@ class Persons extends Api implements PersonsInterface {
   static apiEndpoint = "persons/";
 
   searchPersonByImage({
-    photo,
+    image,
     identify_asm,
   }: SearchPersonByImageParamsInterface): Promise<PersonResponseIterface> {
-    if (!photo) return Promise.reject("No photo provided");
+    if (!image) return Promise.reject("No image provided");
 
     const fieldsData = { identify_asm };
     const data = new FormData();
 
-    addFileToFormData(data, photo, "photo");
+    addFileToFormData(data, image, "image");
     addDataToFormData(data, fieldsData);
 
     return this.httpClient.post(`${Persons.apiEndpoint}search/`, data);
   }
 
   createPerson({
-    photo,
+    image,
     source,
     facesize,
     create_on_ha,
@@ -46,7 +46,7 @@ class Persons extends Api implements PersonsInterface {
     };
     const data = new FormData();
 
-    addFileToFormData(data, photo, "photo");
+    addFileToFormData(data, image, "image");
     addDataToFormData(data, fieldsData);
 
     return this.httpClient.post(Persons.apiEndpoint, data);
@@ -80,17 +80,17 @@ class Persons extends Api implements PersonsInterface {
 
   reinitializePersonByImage({
     pid,
-    photo,
+    image,
     source,
     facesize,
     result,
   }: ReinitializePersonByImageParamsInterface): Promise<{}> {
-    if (!photo) return Promise.reject("No photo provided");
+    if (!image) return Promise.reject("No image provided");
 
     const fieldsData = { source, facesize, result };
     const data = new FormData();
 
-    addFileToFormData(data, photo, "photo");
+    addFileToFormData(data, image, "image");
     addDataToFormData(data, fieldsData);
 
     return this.httpClient.post(`${Persons.apiEndpoint}reinit/${pid}`, data);

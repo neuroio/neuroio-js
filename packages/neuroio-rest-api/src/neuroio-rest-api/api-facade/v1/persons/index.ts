@@ -9,12 +9,12 @@ export interface PersonResponseIterface {
 }
 
 export interface SearchPersonByImageParamsInterface {
-  photo: File;
+  image: File;
   identify_asm?: boolean;
 }
 
 export interface CreatePersonParamsInterface {
-  photo: File;
+  image: File;
   source: string;
   facesize?: number;
   create_on_ha?: boolean;
@@ -34,7 +34,7 @@ export interface ReinitializePersonByEntryParamsInterface {
 
 export interface ReinitializePersonByImageParamsInterface {
   pid: string;
-  photo: File;
+  image: File;
   source: string;
   facesize?: number;
   result?: Result;

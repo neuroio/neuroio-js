@@ -1,8 +1,8 @@
 import { Result, Sex, Mood } from "../../../../base/types";
 
 export interface ComparePhotosParamsInterface {
-  photo1: File;
-  photo2: File;
+  image1: File;
+  image2: File;
   result?: Result;
 }
 
@@ -35,7 +35,7 @@ export interface VerifyPersonPhotoWithDocumentPhotoResponseInterface
 }
 
 export interface CheckAsmParamsInterface {
-  photo: File;
+  image: File;
 }
 
 export interface CheckAsmResponseInterface {

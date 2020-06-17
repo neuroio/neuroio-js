@@ -17,15 +17,15 @@ import {
 
 class Utilities extends Api implements UtilitiesInterface {
   comparePhotos({
-    photo1,
-    photo2,
+    image1,
+    image2,
     result,
   }: ComparePhotosParamsInterface): Promise<ComparePhotosResponseInterface> {
     const fieldsData = { result };
     const data = new FormData();
 
-    addFileToFormData(data, photo1, "photo1");
-    addFileToFormData(data, photo2, "photo2");
+    addFileToFormData(data, image1, "image1");
+    addFileToFormData(data, image2, "image2");
     addDataToFormData(data, fieldsData);
 
     return this.httpClient.post("utility/compare/", data);
@@ -81,14 +81,12 @@ class Utilities extends Api implements UtilitiesInterface {
     return this.httpClient.get("utility/customer/", { source, offset });
   }
 
-  // Added
   checkAsm({
-    photo,
+    image,
   }: CheckAsmParamsInterface): Promise<CheckAsmResponseInterface> {
-    return this.httpClient.post("utility/compare/", { photo });
+    return this.httpClient.post("utility/compare/", { image });
   }
 
-  // Added
   getSupportedIdTypes(): Promise<{}> {
     return this.httpClient.get("faceid/id-codes/");
   }

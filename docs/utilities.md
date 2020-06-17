@@ -19,12 +19,12 @@ const NeuroioRestApi = createNeuroioRestApi({
 });
 
 const comparingResult = NeuroioRestApi.utilities.comparePhotos({
-  photo1: "dataURIPhoto",
-  photo2: "dataURIPhoto",
+  image1: "dataURIPhoto",
+  image2: "dataURIPhoto",
   result: "ha",
 });
 
-comparingResult.then(comparingResult => {
+comparingResult.then((comparingResult) => {
   console.log({ comparingResult });
 });
 ```
@@ -49,7 +49,7 @@ const comparingResult = NeuroioRestApi.utilities.comparePersonPhotoWithDocumentP
   }
 );
 
-comparingResult.then(comparingResult => {
+comparingResult.then((comparingResult) => {
   console.log({ comparingResult });
 });
 ```
@@ -77,7 +77,7 @@ const verifyingResult = NeuroioRestApi.utilities.verifyPersonPhotoWithDocumentPh
   }
 );
 
-verifyingResult.then(verifyingResult => {
+verifyingResult.then((verifyingResult) => {
   console.log({ verifyingResult });
 });
 ```
@@ -99,7 +99,7 @@ const customer = NeuroioRestApi.utilities.findOutCustomer({
   offset: 10,
 });
 
-comparingResult.then(customer => {
+comparingResult.then((customer) => {
   console.log({ customer });
 });
 ```
