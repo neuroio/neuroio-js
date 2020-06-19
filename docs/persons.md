@@ -19,7 +19,7 @@ const NeuroioRestApi = createNeuroioRestApi({
 });
 
 const person = NeuroioRestApi.persons.createPerson({
-  photo: "dataURIPhoto",
+  image: "dataURIPhoto",
   source: "webcam",
   facesize: 10,
   create_on_ha: true,
@@ -89,7 +89,7 @@ const NeuroioRestApi = createNeuroioRestApi({
 });
 
 const person = NeuroioRestApi.persons.searchPersonByImage({
-  photo: "dataURIPhoto",
+  image: "dataURIPhoto",
   identify_asm: true,
 });
 
@@ -137,7 +137,7 @@ const pid = 1;
 
 const person = NeuroioRestApi.persons.reinitializePersonByImage({
   pid,
-  photo: "dataURIPhoto",
+  image: "dataURIPhoto",
   source: "webcam",
   facesize: 100,
   result: "ha",

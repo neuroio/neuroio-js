@@ -256,13 +256,13 @@ describe("NeuroioApi test", () => {
 
     test("searchPersonByImage: should return correct person object", () => {
       const personData = {
-        photo: mockedFile,
+        image: mockedFile,
         identify_asm: true,
       };
 
       const expectedData = {
         identify_asm: true,
-        photo: {
+        image: {
           filename: "handsome.jpg",
           value: mockedFile,
         },
@@ -281,7 +281,7 @@ describe("NeuroioApi test", () => {
 
     test("createPerson: should send POST request with correct data", () => {
       const personData = {
-        photo: mockedFile,
+        image: mockedFile,
         source: "webcam",
         facesize: 100,
         create_on_junk: false,
@@ -294,7 +294,7 @@ describe("NeuroioApi test", () => {
         facesize: 100,
         create_on_junk: false,
         identify_asm: true,
-        photo: {
+        image: {
           filename: "handsome.jpg",
           value: mockedFile,
         },
@@ -354,7 +354,7 @@ describe("NeuroioApi test", () => {
 
       const personData = {
         pid,
-        photo: mockedFile,
+        image: mockedFile,
         source: "webcam",
         facesize: 10,
         result: "ha",
@@ -364,7 +364,7 @@ describe("NeuroioApi test", () => {
         source: "webcam",
         facesize: 10,
         result: "ha",
-        photo: {
+        image: {
           filename: "handsome.jpg",
           value: mockedFile,
         },
@@ -386,8 +386,10 @@ describe("NeuroioApi test", () => {
     const mockedEntry = {
       id: 1,
       created: "2008-09-15T15:53:00",
-      photo: "https://mocked.com/entries/detected/1",
-      initial_photo: "https://mocked.com/entries/initial/1",
+      face_image: "https://mocked.com/entries/detected/1",
+      initial_face_image: "https://mocked.com/entries/initial/1",
+      full_image: "https://mocked.com/entries/detected/1",
+      initial_full_image: "https://mocked.com/entries/initial/1",
       source: {
         id: 0,
         name: "webcam",
@@ -653,18 +655,18 @@ describe("NeuroioApi test", () => {
   describe("Utilities module test", () => {
     test("comparePhotos: should send POST request with correct data", () => {
       const mockedDataToCompare = {
-        photo1: mockedFile,
-        photo2: mockedFile,
+        image1: mockedFile,
+        image2: mockedFile,
         result: "ha",
       };
 
       const expectedData = {
         result: "ha",
-        photo1: {
+        image1: {
           filename: "handsome.jpg",
           value: mockedFile,
         },
-        photo2: {
+        image2: {
           filename: "handsome.jpg",
           value: mockedFile,
         },
