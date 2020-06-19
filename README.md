@@ -1,6 +1,7 @@
 # Neuroio API JS library
 
 ![Node.js CI](https://github.com/neuroio/neuroio-js/workflows/Node.js%20CI/badge.svg)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/54681e5b-bb54-4290-9c0f-1450494a4fbc/deploy-status)](https://app.netlify.com/sites/neuroio-js/deploys)
 
 ## Installation
 
