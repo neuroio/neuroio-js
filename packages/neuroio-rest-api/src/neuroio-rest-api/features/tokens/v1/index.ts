@@ -6,7 +6,7 @@ import {
   GetTokenInterface,
   UpdateTokenParamsInterface,
 } from "../../../api-facade/v1/tokens";
-import { numeric } from "../../../../base/types";
+import { id } from "../../../../base/types";
 
 const TOKENS = "tokens/";
 
@@ -33,7 +33,7 @@ class Tokens extends AuthApi implements TokensInterface {
     return this.httpClient.put(this.authURL + `${TOKENS}${id}/`, { is_active });
   }
 
-  deleteToken(id: numeric): Promise<{}> {
+  deleteToken(id: id): Promise<{}> {
     return this.httpClient.delete(this.authURL + `${TOKENS}${id}/`);
   }
 }

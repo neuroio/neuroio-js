@@ -7,6 +7,7 @@
 
   - [Authorization](authorization.md)
   - [Tokens](tokens.md)
+  - [Spaces](spaces.md)
 
   - [Sources](sources.md)
   - [Entries](entries.md)

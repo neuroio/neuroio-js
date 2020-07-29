@@ -11,6 +11,7 @@ import { ApiFacadeV1 } from "../../src/neuroio-rest-api/api-facade/v1";
 
 import { Auth as AuthV1 } from "../../src/neuroio-rest-api/features/auth/v1";
 import { Tokens as TokensV1 } from "../../src/neuroio-rest-api/features/tokens/v1";
+import { Spaces as SpacesV1 } from "../../src/neuroio-rest-api/features/spaces/v1";
 import { Entries as EntriesV1 } from "../../src/neuroio-rest-api/features/entries/v1";
 import { Notifications as NotificationsV1 } from "../../src/neuroio-rest-api/features/notifications/v1";
 import { Sources as SourcesV1 } from "../../src/neuroio-rest-api/features/sources/v1";
@@ -51,6 +52,7 @@ describe("NeuroioApi test", () => {
     httpClient,
     auth: new AuthV1({ httpClient, authURL: authEndpoint }),
     tokens: new TokensV1({ httpClient, authURL: authEndpoint }),
+    spaces: new SpacesV1({ httpClient, authURL: authEndpoint }),
     notifications: new NotificationsV1({ httpClient }),
     entries: new EntriesV1({ httpClient }),
     persons: new PersonsV1({ httpClient }),
@@ -605,6 +607,79 @@ describe("NeuroioApi test", () => {
       api.sources.deleteSource(sourceId).then(thenFn);
 
       expect(axios.delete).toHaveBeenCalledWith(`sources/${sourceId}/`);
+    });
+  });
+
+  describe("Spaces module test", () => {
+    const mockedSpace = {
+      id: 0,
+      name: "My new awesome space",
+    };
+
+    test("getSpaces: should return correct array of spaces", () => {
+      const mockedSpaces = [mockedSpace];
+      const reqParams = { limit: 20, offset: 0 };
+
+      api.spaces.getSpaces(reqParams).then(thenFn);
+
+      expect(axios.get).toHaveBeenCalledWith(authEndpoint + "spaces/", {
+        params: reqParams,
+      });
+
+      axios.mockResponse({ data: mockedSpaces });
+
+      expect(thenFn).toHaveBeenCalledWith(mockedSpaces);
+    });
+
+    test("createSpace: should send POST request with correct data", () => {
+      const reqData = { name: mockedSpace.name };
+
+      api.spaces.createSpace(reqData).then(thenFn);
+
+      expect(axios.post).toHaveBeenCalledWith(
+        authEndpoint + "spaces/",
+        reqData
+      );
+    });
+
+    test("getSpace: should return correct space object", () => {
+      const spaceId = 1;
+
+      api.spaces.getSpace(spaceId).then(thenFn);
+
+      expect(axios.get).toHaveBeenCalledWith(
+        authEndpoint + `spaces/${spaceId}/`
+      );
+
+      axios.mockResponse({ data: mockedSpace });
+
+      expect(thenFn).toHaveBeenCalledWith(mockedSpace);
+    });
+
+    test("updateSpace: should send PUT request with correct data", () => {
+      const reqId = mockedSpace.id;
+      const reqData = { name: mockedSpace.name };
+
+      api.spaces.updateSpace({ id: reqId, ...reqData }).then(thenFn);
+
+      expect(axios.put).toHaveBeenCalledWith(
+        authEndpoint + `spaces/${reqId}/`,
+        reqData
+      );
+
+      axios.mockResponse({ data: mockedSpace });
+
+      expect(thenFn).toHaveBeenCalledWith(mockedSpace);
+    });
+
+    test("deleteSpace: should send DELETE request with correct data", () => {
+      const spaceId = 1;
+
+      api.spaces.deleteSpace(spaceId).then(thenFn);
+
+      expect(axios.delete).toHaveBeenCalledWith(
+        authEndpoint + `spaces/${spaceId}/`
+      );
     });
   });
 
