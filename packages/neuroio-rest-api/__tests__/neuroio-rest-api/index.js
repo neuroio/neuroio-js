@@ -10,7 +10,7 @@ import { createHttpClient } from "../../src/http-client";
 import { ApiFacadeV1 } from "../../src/neuroio-rest-api/api-facade/v1";
 
 import { Auth as AuthV1 } from "../../src/neuroio-rest-api/features/auth/v1";
-import { Users as UsersV1 } from "../../src/neuroio-rest-api/features/users/v1";
+import { Tokens as TokensV1 } from "../../src/neuroio-rest-api/features/tokens/v1";
 import { Entries as EntriesV1 } from "../../src/neuroio-rest-api/features/entries/v1";
 import { Notifications as NotificationsV1 } from "../../src/neuroio-rest-api/features/notifications/v1";
 import { Sources as SourcesV1 } from "../../src/neuroio-rest-api/features/sources/v1";
@@ -21,12 +21,26 @@ import { Thresholds as ThresholdsV1 } from "../../src/neuroio-rest-api/features/
 jest.mock("axios");
 jest.mock("form-data");
 
-const endpoint = "https://api.mocked.com";
+const endpoint = "https://api.mocked.com/";
+const authEndpoint = "https://ima.mocked.com/";
+
 const pathToMockedImage = path.resolve(__dirname, "../__mocks__/mock.jpg");
 
 global.FormData = FormData;
 
 describe("NeuroioApi test", () => {
+  const userMock = {
+    username: "jane_doe",
+    space: null,
+  };
+  const tokenMock = {
+    key: "token_key",
+    id: 0,
+    is_active: true,
+    created: "2019-07-29T13:53:27.306Z",
+    expires: "2020-07-29T13:53:27.306Z",
+  };
+
   const HttpClient = createHttpClient({ client: axios });
   const httpClient = new HttpClient({
     baseURL: endpoint,
@@ -35,12 +49,12 @@ describe("NeuroioApi test", () => {
 
   const api = new ApiFacadeV1({
     httpClient,
-    auth: new AuthV1({ httpClient }),
+    auth: new AuthV1({ httpClient, authURL: authEndpoint }),
+    tokens: new TokensV1({ httpClient, authURL: authEndpoint }),
     notifications: new NotificationsV1({ httpClient }),
     entries: new EntriesV1({ httpClient }),
     persons: new PersonsV1({ httpClient }),
     sources: new SourcesV1({ httpClient }),
-    users: new UsersV1({ httpClient }),
     utilities: new UtilitiesV1({ httpClient }),
     thresholds: new ThresholdsV1({ httpClient }),
   });
@@ -74,13 +88,13 @@ describe("NeuroioApi test", () => {
       const password = "04.09.2001";
 
       const mockedData = {
-        user: "Jane",
-        token: "mocked token",
+        user: userMock,
+        token: tokenMock,
       };
 
       api.init(username, password).then(thenFn);
 
-      expect(axios.post).toHaveBeenCalledWith("login/", {
+      expect(axios.post).toHaveBeenCalledWith(authEndpoint + "auth/token/", {
         username,
         password,
       });
@@ -107,19 +121,19 @@ describe("NeuroioApi test", () => {
     const username = "Jane Doe";
     const password = "04.09.2001";
 
-    const mockedData = {
-      user: "Jane",
-      token: "mocked token",
-    };
-
     describe("login/logout", () => {
       test("login: should send POST request to API server with data on correct endpoint", () => {
         api.auth.login(username, password).then(thenFn);
 
-        expect(axios.post).toHaveBeenCalledWith("login/", {
+        expect(axios.post).toHaveBeenCalledWith(authEndpoint + "auth/token/", {
           username,
           password,
         });
+
+        const mockedData = {
+          user: userMock,
+          token: tokenMock,
+        };
 
         axios.mockResponse({ data: mockedData });
 
@@ -131,32 +145,109 @@ describe("NeuroioApi test", () => {
 
         api.auth.logout(tokenId);
 
-        expect(axios.delete).toHaveBeenCalledWith(`/users/tokens/${tokenId}/`);
+        expect(axios.delete).toHaveBeenCalledWith(
+          authEndpoint + `tokens/${tokenId}/`
+        );
       });
     });
 
-    describe("tokens test", () => {
-      test("generateToken: should send POST request to API server on correct endpoint", () => {
-        api.auth.generateToken().then(thenFn);
+    test("whoami: should send get request to API server on correct endpoint", () => {
+      api.auth.whoami().then(thenFn);
 
-        expect(axios.post).toHaveBeenCalledWith("login/");
+      expect(axios.get).toHaveBeenCalledWith(authEndpoint + "whoami/");
 
-        axios.mockResponse({ data: mockedData });
+      axios.mockResponse({ data: userMock });
 
-        expect(thenFn).toHaveBeenCalledWith(mockedData);
+      expect(thenFn).toHaveBeenCalledWith(userMock);
+    });
+
+    test("changePassword: should send correct password data", () => {
+      const mockedData = {
+        old_password: "old_pass",
+        password: "new_pass",
+        password2: "new_pass",
+      };
+
+      api.auth.changePassword(mockedData).then(thenFn);
+
+      expect(axios.post).toHaveBeenCalledWith(
+        authEndpoint + "auth/password/change/",
+        mockedData
+      );
+    });
+  });
+
+  describe("Tokens module test", () => {
+    test("getTokens: should return correct array of tokens", () => {
+      const mockedTokens = [tokenMock];
+      const reqParams = {
+        permanent: false,
+        limit: 20,
+        offset: 10,
+      };
+
+      api.tokens.getTokens(reqParams).then(thenFn);
+
+      expect(axios.get).toHaveBeenCalledWith(authEndpoint + "tokens/", {
+        params: reqParams,
       });
 
-      test("generatePermanentToken: should send POST request to API server with data on correct endpoint", () => {
-        api.auth.generatePermanentToken(username, password).then(thenFn);
+      axios.mockResponse({ data: mockedTokens });
 
-        expect(axios.post).toHaveBeenCalledWith("login/permanent/", {
-          username,
-          password,
-        });
+      expect(thenFn).toHaveBeenCalledWith(mockedTokens);
+    });
 
-        axios.mockResponse({ data: mockedData });
+    test("createToken: should send POST request with correct data", () => {
+      const reqData = {
+        permanent: true,
+      };
 
-        expect(thenFn).toHaveBeenCalledWith(mockedData);
+      api.tokens.createToken(reqData).then(thenFn);
+
+      expect(axios.post).toHaveBeenCalledWith(
+        authEndpoint + "tokens/",
+        reqData
+      );
+
+      axios.mockResponse({ data: tokenMock });
+
+      expect(thenFn).toHaveBeenCalledWith(tokenMock);
+    });
+
+    test("updateToken: should send PUT request with correct data", () => {
+      const reqData = { id: 1, is_active: false };
+
+      api.tokens.updateToken(reqData).then(thenFn);
+
+      expect(axios.put).toHaveBeenCalledWith(
+        authEndpoint + `tokens/${reqData.id}/`,
+        {
+          is_active: reqData.is_active,
+        }
+      );
+
+      axios.mockResponse({ data: tokenMock });
+
+      expect(thenFn).toHaveBeenCalledWith(tokenMock);
+    });
+
+    test("deleteToken: should send DELETE request with correct data", () => {
+      const tokenId = 1;
+
+      api.tokens.deleteToken(tokenId).then(thenFn);
+
+      expect(axios.delete).toHaveBeenCalledWith(
+        authEndpoint + `tokens/${tokenId}/`
+      );
+    });
+
+    test("deleteTokens: should send DELETE request with correct data", () => {
+      const reqParams = { permanent: true };
+
+      api.tokens.deleteTokens(reqParams).then(thenFn);
+
+      expect(axios.delete).toHaveBeenCalledWith(authEndpoint + "tokens/", {
+        params: reqParams,
       });
     });
   });
@@ -514,94 +605,6 @@ describe("NeuroioApi test", () => {
       api.sources.deleteSource(sourceId).then(thenFn);
 
       expect(axios.delete).toHaveBeenCalledWith(`sources/${sourceId}/`);
-    });
-  });
-
-  describe("Users module test", () => {
-    const mockedToken = {
-      name: "My new awesome token",
-    };
-
-    test("getTokens: should return correct array of tokens", () => {
-      const mockedTokens = [mockedToken];
-
-      api.users.getTokens().then(thenFn);
-
-      expect(axios.get).toHaveBeenCalledWith("users/tokens/");
-
-      axios.mockResponse({ data: mockedTokens });
-
-      expect(thenFn).toHaveBeenCalledWith(mockedTokens);
-    });
-
-    test("createToken: should send POST request with correct data", () => {
-      api.users.createToken(mockedToken).then(thenFn);
-
-      expect(axios.post).toHaveBeenCalledWith("login/permanent/", mockedToken);
-    });
-
-    test("updateToken: should send PUT request with correct data", () => {
-      const tokenId = 1;
-
-      api.users.updateToken({ id: tokenId, is_active: false }).then(thenFn);
-
-      expect(axios.put).toHaveBeenCalledWith(`users/tokens/${tokenId}/`, {
-        is_active: false,
-      });
-
-      axios.mockResponse({ data: mockedToken });
-
-      expect(thenFn).toHaveBeenCalledWith(mockedToken);
-    });
-
-    test("deleteToken: should send DELETE request with correct data", () => {
-      const tokenId = 1;
-
-      api.users.deleteToken(tokenId).then(thenFn);
-
-      expect(axios.delete).toHaveBeenCalledWith(`users/tokens/${tokenId}/`);
-    });
-
-    test("deleteTokens: should send DELETE request with correct data", () => {
-      api.users.deleteTokens({ permanent: true }).then(thenFn);
-
-      expect(axios.delete).toHaveBeenCalledWith(`users/tokens/`, {
-        params: { permanent: true },
-      });
-    });
-
-    test("getUser: should return correct user data", () => {
-      const mockedUserData = {
-        username: "MyMockedName",
-        group: "MyMockedGroup",
-      };
-
-      api.users.getUser().then(thenFn);
-
-      expect(axios.get).toHaveBeenCalledWith("users/me/");
-
-      axios.mockResponse({ data: mockedUserData });
-
-      expect(thenFn).toHaveBeenCalledWith(mockedUserData);
-    });
-
-    test("changePassword: should send correct password data", () => {
-      const mockedPasswordData = {
-        old_password: "old_pass",
-        password: "new_pass",
-        password2: "new_pass",
-      };
-
-      api.users.changePassword(mockedPasswordData).then(thenFn);
-
-      expect(axios.post).toHaveBeenCalledWith(
-        "users/password/change/",
-        mockedPasswordData
-      );
-
-      axios.mockResponse({ data: { success: true } });
-
-      expect(thenFn).toHaveBeenCalledWith({ success: true });
     });
   });
 

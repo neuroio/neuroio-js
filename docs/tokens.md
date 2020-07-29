@@ -6,7 +6,7 @@
 
 !> Note that parameters documentation available on the links to Neuroio API references below.
 
-## Generate token
+## Create token
 
 [Neuroio API](https://kb.neuroio.com/#/authorization?id=token-generation)
 
@@ -18,29 +18,12 @@ const NeuroioRestApi = createNeuroioRestApi({
   token: NEUROIO_TOKEN,
 });
 
-const token = NeuroioRestApi.auth.generateToken();
+const token = NeuroioRestApi.tokens.createToken({
+  permanent: true,
+});
 
-token.then(token => {
+token.then((token) => {
   console.log({ token });
-});
-```
-
-## Generate permanent token
-
-[Neuroio API](https://kb.neuroio.com/#/authorization?id=token-generation)
-
-```js
-import { createNeuroioRestApi } from "@neuroio/api";
-
-const NeuroioRestApi = createNeuroioRestApi({
-  version: 1,
-  token: NEUROIO_TOKEN,
-});
-
-const permanentToken = NeuroioRestApi.auth.generatePermanentToken();
-
-permanentToken.then(permanentToken => {
-  console.log({ permanentToken });
 });
 ```
 
@@ -58,12 +41,12 @@ const NeuroioRestApi = createNeuroioRestApi({
 
 const tokenId = 1;
 
-const token = NeuroioRestApi.users.updateToken({
+const token = NeuroioRestApi.tokens.updateToken({
   id: tokenId,
-  isActive: false,
+  is_active: false,
 });
 
-token.then(token => {
+token.then((token) => {
   console.log({ token });
 });
 ```
@@ -82,7 +65,7 @@ const NeuroioRestApi = createNeuroioRestApi({
 
 const tokenId = 1;
 
-const token = NeuroioRestApi.users.deleteToken(tokenId);
+const token = NeuroioRestApi.tokens.deleteToken(tokenId);
 
 token.then(() => {
   console.log("Token was deleted!");
@@ -101,7 +84,7 @@ const NeuroioRestApi = createNeuroioRestApi({
   token: NEUROIO_TOKEN,
 });
 
-const tokens = NeuroioRestApi.users.deleteToken({ permanent: true });
+const tokens = NeuroioRestApi.tokens.deleteToken({ permanent: true });
 
 tokens.then(() => {
   console.log("All permanent tokens were deleted!");

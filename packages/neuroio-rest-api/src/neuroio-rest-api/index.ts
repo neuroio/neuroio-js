@@ -9,7 +9,7 @@ import { Entries as EntriesV1 } from "./features/entries/v1";
 import { Notifications as NotificationsV1 } from "./features/notifications/v1";
 import { Persons as PersonsV1 } from "./features/persons/v1";
 import { Sources as SourcesV1 } from "./features/sources/v1";
-import { Users as UsersV1 } from "./features/users/v1";
+import { Tokens as TokensV1 } from "./features/tokens/v1";
 import { Utilities as UtilitiesV1 } from "./features/utilities/v1";
 import { PersonsGroups as PersonsGroupsV1 } from "./features/persons-groups/v1";
 import { Thresholds as ThresholdsV1 } from "./features/thresholds/v1";
@@ -28,18 +28,18 @@ function createNeuroioRestApiV1({
 } = {}): ApiFacadeV1Interface {
   const HttpClient = createHttpClient({ client: axios });
   const httpClient = new HttpClient({
-    baseURL: apiEndpoints.v1,
+    baseURL: apiEndpoints.v1.base,
     token,
   });
 
   return new ApiFacadeV1({
     httpClient,
-    auth: new AuthV1({ httpClient }),
+    auth: new AuthV1({ httpClient, authURL: apiEndpoints.v1.auth }),
+    tokens: new TokensV1({ httpClient, authURL: apiEndpoints.v1.auth }),
     notifications: new NotificationsV1({ httpClient }),
     entries: new EntriesV1({ httpClient }),
     persons: new PersonsV1({ httpClient }),
     sources: new SourcesV1({ httpClient }),
-    users: new UsersV1({ httpClient }),
     utilities: new UtilitiesV1({ httpClient }),
     personsGroups: new PersonsGroupsV1({ httpClient }),
     thresholds: new ThresholdsV1({ httpClient }),
