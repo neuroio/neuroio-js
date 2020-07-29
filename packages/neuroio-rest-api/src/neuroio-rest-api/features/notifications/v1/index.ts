@@ -43,10 +43,12 @@ class Notifications extends Api implements NotificationsInterface {
       q,
       limit,
       offset,
+      spaces_ids,
     }: NotificationsFiltersInterface): {} => ({
       q,
       limit,
       offset,
+      spaces_ids,
     });
 
     return this.httpClient.get(

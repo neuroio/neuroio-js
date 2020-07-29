@@ -501,7 +501,7 @@ describe("NeuroioApi test", () => {
       const mockedFilters = {
         result: "some_result",
         liveness: "some_liveness",
-        source: 2,
+        sources_ids: 2,
         id_from: 100,
         date_from: "some_date_from",
         date_to: "some_date_to",

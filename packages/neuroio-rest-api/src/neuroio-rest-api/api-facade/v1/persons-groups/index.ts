@@ -4,12 +4,15 @@ export interface GetPersonsGroupsFiltersInterface
   extends Paginatable,
     Searchable {
   groups_ids?: Array<id>;
+  spaces_ids?: Array<id>;
   pids_include?: Array<string>;
   pids_exclude?: Array<string>;
 }
 
 export interface PersonsGroupInterface {
   id?: id;
+  // read only
+  space_id?: id;
   name?: string;
   persons_count?: number;
 }

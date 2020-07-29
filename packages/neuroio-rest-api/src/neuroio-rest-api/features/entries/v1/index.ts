@@ -4,17 +4,22 @@ import { id } from "../../../../base/types";
 import {
   EntriesFiltersInterface,
   EntriesInterface,
+  EntryInterface,
+  EntriesStatsInterface,
 } from "../../../api-facade/v1/entries";
 
 class Entries extends Api implements EntriesInterface {
   static apiEndpoint = "entries/";
 
-  getEntries(filters: EntriesFiltersInterface = {}): Promise<{}> {
+  getEntries(
+    filters: EntriesFiltersInterface = {}
+  ): Promise<Array<EntryInterface>> {
     const getFiltersData = ({
       pid,
+      sources_ids,
+      spaces_ids,
       result,
       liveness,
-      source,
       id_from,
       date_from,
       date_to,
@@ -26,9 +31,10 @@ class Entries extends Api implements EntriesInterface {
       age_to,
     }: EntriesFiltersInterface): {} => ({
       pid,
+      sources_ids,
+      spaces_ids,
       result,
       liveness,
-      source,
       id_from,
       date_from,
       date_to,
@@ -43,7 +49,7 @@ class Entries extends Api implements EntriesInterface {
     return this.httpClient.get(Entries.apiEndpoint, getFiltersData(filters));
   }
 
-  getEntriesStatsByPersonId(pid: string): Promise<{}> {
+  getEntriesStatsByPersonId(pid: string): Promise<EntriesStatsInterface> {
     return this.httpClient.get(`${Entries.apiEndpoint}stats/pid/${pid}/`);
   }
 

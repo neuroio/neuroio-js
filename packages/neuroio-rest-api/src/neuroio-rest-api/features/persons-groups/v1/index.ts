@@ -23,6 +23,7 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
       limit,
       offset,
       groups_ids,
+      spaces_ids,
       pids_include,
       pids_exclude,
     }: GetPersonsGroupsFiltersInterface = {}): {} => ({
@@ -30,6 +31,7 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
       limit,
       offset,
       groups_ids,
+      spaces_ids,
       pids_include,
       pids_exclude,
     });

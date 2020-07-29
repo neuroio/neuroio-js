@@ -10,6 +10,8 @@ import {
 
 export interface NotificationInterface {
   id?: id;
+  // read only
+  space_id?: id;
   name?: string;
   is_active?: boolean;
   http_method?: number;
@@ -24,9 +26,9 @@ export interface NotificationInterface {
   liveness?: Array<Liveness>;
 }
 
-export interface NotificationsFiltersInterface
-  extends Paginatable,
-    Searchable {}
+export interface NotificationsFiltersInterface extends Paginatable, Searchable {
+  spaces_ids?: Array<id>;
+}
 
 export interface NotificationsInterface {
   getNotifications(filters: NotificationsFiltersInterface): Promise<{}>;

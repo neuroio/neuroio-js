@@ -62,10 +62,12 @@ class Sources extends Api implements SourcesInterface {
       q,
       limit,
       offset,
+      spaces_ids,
     }: SourcesFiltersInterface = {}): {} => ({
       q,
       limit,
       offset,
+      spaces_ids,
     });
 
     return this.httpClient.get(Sources.apiEndpoint, getFiltersData(filters));
