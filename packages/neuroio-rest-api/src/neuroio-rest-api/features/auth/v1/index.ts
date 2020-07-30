@@ -1,4 +1,4 @@
-import { AuthApi } from "../../../../base/auth-api";
+import { AuthApi, AuthApiSettingsInterface } from "../../../../base/auth-api";
 import {
   AuthInterface,
   UserInterface,
@@ -7,6 +7,14 @@ import {
 } from "../../../api-facade/auth";
 
 class Auth extends AuthApi implements AuthInterface {
+  constructor(settings: AuthApiSettingsInterface) {
+    super(settings);
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.whoami = this.whoami.bind(this);
+    this.changePassword = this.changePassword.bind(this);
+  }
+
   login(username: string, password: string): Promise<LoginUserInterface> {
     return this.httpClient
       .post(this.authURL + "auth/token/", { username, password })

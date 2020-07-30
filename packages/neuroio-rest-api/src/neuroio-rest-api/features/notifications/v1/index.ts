@@ -1,4 +1,4 @@
-import { Api } from "../../../../base/api";
+import { Api, ApiSettingsInterface } from "../../../../base/api";
 import { id } from "../../../../base/types";
 
 import {
@@ -8,6 +8,15 @@ import {
 } from "../../../api-facade/v1/notifications";
 
 class Notifications extends Api implements NotificationsInterface {
+  constructor(settings: ApiSettingsInterface) {
+    super(settings);
+    this.getNotifications = this.getNotifications.bind(this);
+    this.getNotification = this.getNotification.bind(this);
+    this.createNotification = this.createNotification.bind(this);
+    this.updateNotification = this.updateNotification.bind(this);
+    this.deleteNotification = this.deleteNotification.bind(this);
+  }
+
   static apiEndpoint = "notifications/";
 
   static getNotificationData = ({

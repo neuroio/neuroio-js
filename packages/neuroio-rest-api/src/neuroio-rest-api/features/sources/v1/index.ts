@@ -1,4 +1,4 @@
-import { Api } from "../../../../base/api";
+import { Api, ApiSettingsInterface } from "../../../../base/api";
 import {
   SourcesInterface,
   SourceInterface,
@@ -7,6 +7,15 @@ import {
 import { id } from "../../../../base/types";
 
 class Sources extends Api implements SourcesInterface {
+  constructor(settings: ApiSettingsInterface) {
+    super(settings);
+    this.getSources = this.getSources.bind(this);
+    this.getSource = this.getSource.bind(this);
+    this.createSource = this.createSource.bind(this);
+    this.updateSource = this.updateSource.bind(this);
+    this.deleteSource = this.deleteSource.bind(this);
+  }
+
   static apiEndpoint = "sources/";
 
   static getSourceData = ({

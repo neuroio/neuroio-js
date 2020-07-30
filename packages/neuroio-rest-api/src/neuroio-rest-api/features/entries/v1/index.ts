@@ -1,4 +1,4 @@
-import { Api } from "../../../../base/api";
+import { Api, ApiSettingsInterface } from "../../../../base/api";
 import { id } from "../../../../base/types";
 
 import {
@@ -9,6 +9,13 @@ import {
 } from "../../../api-facade/v1/entries";
 
 class Entries extends Api implements EntriesInterface {
+  constructor(settings: ApiSettingsInterface) {
+    super(settings);
+    this.getEntries = this.getEntries.bind(this);
+    this.getEntriesStatsByPersonId = this.getEntriesStatsByPersonId.bind(this);
+    this.deleteEntry = this.deleteEntry.bind(this);
+  }
+
   static apiEndpoint = "entries/";
 
   getEntries(
