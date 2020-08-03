@@ -2,6 +2,7 @@ import {
   ApiFacade,
   ApiFacadeInterface,
   ApiFacadeSettingsInterface,
+  EndpointInterface,
 } from "../base";
 
 import { TokensInterface } from "./tokens";
@@ -80,6 +81,12 @@ class ApiFacadeV1 extends ApiFacade {
     this.utilities = utilities;
     this.personsGroups = personsGroups;
     this.thresholds = thresholds;
+  }
+
+  setEndpoint(endpoint: EndpointInterface) {
+    super.setEndpoint(endpoint);
+    this.tokens.setAuthURL(endpoint.auth);
+    this.spaces.setAuthURL(endpoint.auth);
   }
 }
 
