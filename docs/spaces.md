@@ -74,6 +74,25 @@ space.then(() => {
 });
 ```
 
+## Create space auth token
+
+```js
+import { createNeuroioRestApi } from "@neuroio/api";
+
+const NeuroioRestApi = createNeuroioRestApi({
+  version: 1,
+  token: NEUROIO_TOKEN,
+});
+
+const spaceId = 1;
+
+const token = NeuroioRestApi.spaces.createToken(spaceId, { permanent: false });
+
+token.then((token) => {
+  console.log({ token });
+});
+```
+
 ## Update space settings
 
 ```js

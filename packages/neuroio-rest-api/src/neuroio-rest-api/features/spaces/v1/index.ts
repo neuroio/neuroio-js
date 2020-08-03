@@ -6,6 +6,10 @@ import {
   GetSpacesParamsInterface,
 } from "../../../api-facade/v1/spaces";
 import { id } from "../../../../base/types";
+import {
+  TokenInterface,
+  GetTokenInterface,
+} from "../../../api-facade/v1/tokens";
 
 class Spaces extends AuthApi implements SpacesInterface {
   constructor(settings: AuthApiSettingsInterface) {
@@ -47,6 +51,13 @@ class Spaces extends AuthApi implements SpacesInterface {
 
   deleteSpace(id: id): Promise<{}> {
     return this.httpClient.delete(this.authURL + `${Spaces.apiEndpoint}${id}/`);
+  }
+
+  createToken(id: id, data: GetTokenInterface): Promise<TokenInterface> {
+    return this.httpClient.post(
+      this.authURL + `${Spaces.apiEndpoint}${id}/tokens/`,
+      data
+    );
   }
 }
 

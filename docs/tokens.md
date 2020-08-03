@@ -6,9 +6,10 @@
 
 !> Note that parameters documentation available on the links to Neuroio API references below.
 
-## Create token
+## Create user auth token
 
 [Neuroio API](https://kb.neuroio.com/#/authorization?id=token-generation)
+[how to create space token](./spaces.md#create-space-auth-token)
 
 ```js
 import { createNeuroioRestApi } from "@neuroio/api";

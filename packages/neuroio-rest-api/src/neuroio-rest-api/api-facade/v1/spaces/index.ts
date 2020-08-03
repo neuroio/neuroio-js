@@ -1,5 +1,6 @@
 import { Paginatable, Searchable, id } from "../../../../base/types";
 import { AuthApiInterface } from "../../../../base/auth-api";
+import { GetTokenInterface, TokenInterface } from "../tokens";
 
 export interface SpaceInterface {
   id: id;
@@ -18,4 +19,5 @@ export interface SpacesInterface extends AuthApiInterface {
   createSpace(data: SpaceDataInterface): Promise<SpaceInterface>;
   updateSpace(data: SpaceInterface): Promise<SpaceInterface>;
   deleteSpace(id: id): Promise<{}>;
+  createToken(id: id, data: GetTokenInterface): Promise<TokenInterface>;
 }
