@@ -8,7 +8,7 @@ import {
 import { id } from "../../../../base/types";
 import {
   TokenInterface,
-  GetTokenInterface,
+  CreateSpaceTokenInterface,
 } from "../../../api-facade/v1/tokens";
 
 class Spaces extends AuthApi implements SpacesInterface {
@@ -19,6 +19,7 @@ class Spaces extends AuthApi implements SpacesInterface {
     this.createSpace = this.createSpace.bind(this);
     this.updateSpace = this.updateSpace.bind(this);
     this.deleteSpace = this.deleteSpace.bind(this);
+    this.createToken = this.createToken.bind(this);
   }
 
   static apiEndpoint = "spaces/";
@@ -53,10 +54,12 @@ class Spaces extends AuthApi implements SpacesInterface {
     return this.httpClient.delete(this.authURL + `${Spaces.apiEndpoint}${id}/`);
   }
 
-  createToken(id: id, data: GetTokenInterface): Promise<TokenInterface> {
+  createToken(data: CreateSpaceTokenInterface): Promise<TokenInterface> {
+    const { id, ...restData } = data;
+
     return this.httpClient.post(
       this.authURL + `${Spaces.apiEndpoint}${id}/tokens/`,
-      data
+      restData
     );
   }
 }
