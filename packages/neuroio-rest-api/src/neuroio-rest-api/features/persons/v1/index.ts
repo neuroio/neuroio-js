@@ -1,4 +1,4 @@
-import { Api } from "../../../../base/api";
+import { Api, ApiSettingsInterface } from "../../../../base/api";
 
 import { addFileToFormData, addDataToFormData } from "../../../../utils";
 import {
@@ -12,6 +12,16 @@ import {
 } from "../../../api-facade/v1/persons";
 
 class Persons extends Api implements PersonsInterface {
+  constructor(settings: ApiSettingsInterface) {
+    super(settings);
+    this.searchPersonByImage = this.searchPersonByImage.bind(this);
+    this.createPerson = this.createPerson.bind(this);
+    this.createPersonFromEntry = this.createPersonFromEntry.bind(this);
+    this.deletePerson = this.deletePerson.bind(this);
+    this.reinitializePersonByEntry = this.reinitializePersonByEntry.bind(this);
+    this.reinitializePersonByImage = this.reinitializePersonByImage.bind(this);
+  }
+
   static apiEndpoint = "persons/";
 
   searchPersonByImage({

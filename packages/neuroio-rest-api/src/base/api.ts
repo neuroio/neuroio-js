@@ -2,7 +2,9 @@ export interface ApiSettingsInterface {
   httpClient: any;
 }
 
-class Api {
+export interface ApiInterface {}
+
+class Api implements ApiInterface {
   protected httpClient: any;
 
   constructor(settings: ApiSettingsInterface) {
