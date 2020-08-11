@@ -1,4 +1,4 @@
-import { Api } from "../../../../base/api";
+import { Api, ApiSettingsInterface } from "../../../../base/api";
 
 import { addFileToFormData, addDataToFormData } from "../../../../utils";
 import {
@@ -16,6 +16,21 @@ import {
 } from "../../../api-facade/v1/utilities";
 
 class Utilities extends Api implements UtilitiesInterface {
+  constructor(settings: ApiSettingsInterface) {
+    super(settings);
+    this.comparePhotos = this.comparePhotos.bind(this);
+    this.comparePersonPhotoWithDocumentPhoto = this.comparePersonPhotoWithDocumentPhoto.bind(
+      this
+    );
+    this.verifyPersonPhotoWithDocumentPhoto = this.verifyPersonPhotoWithDocumentPhoto.bind(
+      this
+    );
+    this.findOutCustomer = this.findOutCustomer.bind(this);
+    this.checkAsm = this.checkAsm.bind(this);
+    this.getSupportedIdTypes = this.getSupportedIdTypes.bind(this);
+    this.getApiVersion = this.getApiVersion.bind(this);
+  }
+
   comparePhotos({
     image1,
     image2,

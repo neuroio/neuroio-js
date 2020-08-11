@@ -1,4 +1,4 @@
-import { Api } from "../../../../base/api";
+import { Api, ApiSettingsInterface } from "../../../../base/api";
 
 import {
   PersonsGroupsInterface,
@@ -11,6 +11,20 @@ import {
 import { id } from "../../../../base/types";
 
 class PersonsGroups extends Api implements PersonsGroupsInterface {
+  constructor(settings: ApiSettingsInterface) {
+    super(settings);
+    this.getPersonsGroups = this.getPersonsGroups.bind(this);
+    this.getPersonsGroup = this.getPersonsGroup.bind(this);
+    this.createPersonsGroup = this.createPersonsGroup.bind(this);
+    this.updatePersonsGroup = this.updatePersonsGroup.bind(this);
+    this.deletePersonsGroup = this.deletePersonsGroup.bind(this);
+    this.getPersonsGroupPersons = this.getPersonsGroupPersons.bind(this);
+    this.addPersonsToPersonsGroups = this.addPersonsToPersonsGroups.bind(this);
+    this.removePersonsFromPersonsGroups = this.removePersonsFromPersonsGroups.bind(
+      this
+    );
+  }
+
   static apiEndpoint = "groups/persons/";
 
   static getPersonsGroupData = ({ name }: PersonsGroupInterface = {}): {} => ({
@@ -23,6 +37,7 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
       limit,
       offset,
       groups_ids,
+      spaces_ids,
       pids_include,
       pids_exclude,
     }: GetPersonsGroupsFiltersInterface = {}): {} => ({
@@ -30,6 +45,7 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
       limit,
       offset,
       groups_ids,
+      spaces_ids,
       pids_include,
       pids_exclude,
     });

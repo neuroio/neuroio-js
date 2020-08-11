@@ -4,6 +4,8 @@ import { License } from "./types";
 export interface SourceInterface {
   // General
   id?: id;
+  // read only
+  space_id?: id;
   name?: string;
   license_type?: License;
   identify_facesize_threshold?: number;
@@ -32,7 +34,9 @@ export interface SourceInterface {
   store_images_for_results?: Array<Result>;
 }
 
-export interface SourcesFiltersInterface extends Paginatable, Searchable {}
+export interface SourcesFiltersInterface extends Paginatable, Searchable {
+  spaces_ids?: Array<id>;
+}
 
 export interface SourcesInterface {
   getSources(filters: SourcesFiltersInterface): Promise<{}>;

@@ -4,7 +4,7 @@ import { apiVersions } from "../src/constants";
 import { ApiFacadeV1 } from "../src/neuroio-rest-api/api-facade/v1";
 
 import { Auth as AuthV1 } from "../src/neuroio-rest-api/features/auth/v1";
-import { Users as UsersV1 } from "../src/neuroio-rest-api/features/users/v1";
+import { Tokens as TokensV1 } from "../src/neuroio-rest-api/features/tokens/v1";
 import { Entries as EntriesV1 } from "../src/neuroio-rest-api/features/entries/v1";
 import { Notifications as NotificationsV1 } from "../src/neuroio-rest-api/features/notifications/v1";
 import { Sources as SourcesV1 } from "../src/neuroio-rest-api/features/sources/v1";
@@ -50,7 +50,7 @@ describe("createNeuroioRestApi test", () => {
 
     expect(NeuroioRestApiInstanse.auth).toBeInstanceOf(AuthV1);
     expect(NeuroioRestApiInstanse.entries).toBeInstanceOf(EntriesV1);
-    expect(NeuroioRestApiInstanse.users).toBeInstanceOf(UsersV1);
+    expect(NeuroioRestApiInstanse.tokens).toBeInstanceOf(TokensV1);
     expect(NeuroioRestApiInstanse.notifications).toBeInstanceOf(
       NotificationsV1
     );
