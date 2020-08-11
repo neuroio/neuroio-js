@@ -4,12 +4,10 @@ import {
   SpaceDataInterface,
   SpacesInterface,
   GetSpacesParamsInterface,
+  CreateSpaceTokenInterface,
 } from "../../../api-facade/v1/spaces";
 import { id } from "../../../../base/types";
-import {
-  TokenInterface,
-  CreateSpaceTokenInterface,
-} from "../../../api-facade/v1/tokens";
+import { TokenInterface } from "../../../api-facade/v1/tokens";
 
 class Spaces extends AuthApi implements SpacesInterface {
   constructor(settings: AuthApiSettingsInterface) {
