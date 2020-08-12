@@ -1,6 +1,6 @@
 {
   "name": "@neuroio/websocket",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Library for work with Neuroio WebSocket API",
   "main": "./dist/index.node.js",
   "browser": {
