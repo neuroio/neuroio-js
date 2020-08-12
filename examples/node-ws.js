@@ -9,8 +9,6 @@ const NeuroioWsApi = createNeuroioWsApi({
   token: NEUROIO_TOKEN,
 });
 
-NeuroioWsApi.connect();
-
 NeuroioWsApi.on("connect", () => {
   console.log("🤝 connected!");
 });
@@ -18,6 +16,8 @@ NeuroioWsApi.on("connect", () => {
 NeuroioWsApi.on("message", message => {
   console.log("✉️ message received!", { message });
 });
+
+NeuroioWsApi.connect();
 
 /**
  * NOTE: if you want to update token
