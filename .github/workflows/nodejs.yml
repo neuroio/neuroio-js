@@ -20,5 +20,5 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm run ci:all
-      - run: npm run validate
+      - run: make install-ci
+      - run: make validate

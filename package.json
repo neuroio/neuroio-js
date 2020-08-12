@@ -13,6 +13,7 @@
     "lint": "eslint src",
     "prettier": "prettier \"**/*.+(js|jsx|json)\"",
     "format": "npm run prettier -- --write",
+    "install:all": "npm install --prefix packages/neuroio-rest-api && npm install --prefix packages/neuroio-websocket && npm install",
     "ci:all": "npm ci --prefix packages/neuroio-rest-api && npm ci --prefix packages/neuroio-websocket && npm ci",
     "test:all": "npm test --prefix packages/neuroio-rest-api && npm test --prefix packages/neuroio-websocket",
     "validate": "npm run lint && npm run test:all && npm run prettier -- --list-different",
