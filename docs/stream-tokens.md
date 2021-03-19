@@ -1,15 +1,6 @@
-# User tokens API reference
+# Stream tokens API reference
 
-## Neuroio API references
-
-[Neuroio API](https://kb.neuroio.com/#/authorization)
-
-!> Note that parameters documentation available on the links to Neuroio API references below.
-
-## Create user auth token
-
-[Neuroio API](https://kb.neuroio.com/#/authorization?id=token-generation)
-[how to create space token](./spaces.md#create-space-auth-token)
+## Create stream auth token
 
 ```js
 import { createNeuroioRestApi } from "@neuroio/api";
@@ -19,7 +10,7 @@ const NeuroioRestApi = createNeuroioRestApi({
   token: NEUROIO_TOKEN,
 });
 
-const token = NeuroioRestApi.tokens.createToken({
+const token = NeuroioRestApi.streamTokens.createStreamToken({
   permanent: true,
 });
 
@@ -29,8 +20,6 @@ token.then((token) => {
 ```
 
 ## Activate/Deactivate token
-
-[Neuroio API](https://kb.neuroio.com/#/authorization?id=token-deactivationactivation)
 
 ```js
 import { createNeuroioRestApi } from "@neuroio/api";
@@ -42,7 +31,7 @@ const NeuroioRestApi = createNeuroioRestApi({
 
 const tokenId = 1;
 
-const token = NeuroioRestApi.tokens.updateToken({
+const token = NeuroioRestApi.streamTokens.updateStreamToken({
   id: tokenId,
   is_active: false,
 });
@@ -54,8 +43,6 @@ token.then((token) => {
 
 ## Delete user token
 
-[Neuroio API](https://kb.neuroio.com/#/authorization?id=deleting-a-token)
-
 ```js
 import { createNeuroioRestApi } from "@neuroio/api";
 
@@ -66,7 +53,7 @@ const NeuroioRestApi = createNeuroioRestApi({
 
 const tokenId = 1;
 
-const token = NeuroioRestApi.tokens.deleteToken(tokenId);
+const token = NeuroioRestApi.streamTokens.deleteStreamTokens(tokenId);
 
 token.then(() => {
   console.log("Token was deleted!");
@@ -74,8 +61,6 @@ token.then(() => {
 ```
 
 ## Delete user tokens
-
-[Neuroio API](https://kb.neuroio.com/#/authorization?id=deleting-all-users-tokens)
 
 ```js
 import { createNeuroioRestApi } from "@neuroio/api";
@@ -85,7 +70,7 @@ const NeuroioRestApi = createNeuroioRestApi({
   token: NEUROIO_TOKEN,
 });
 
-const tokens = NeuroioRestApi.tokens.deleteToken({ permanent: true });
+const tokens = NeuroioRestApi.streamTokens.deleteStreamTokens({ permanent: true });
 
 tokens.then(() => {
   console.log("All permanent tokens were deleted!");
