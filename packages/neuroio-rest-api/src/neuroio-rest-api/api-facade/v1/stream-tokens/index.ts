@@ -22,7 +22,9 @@ export interface UpdateStreamTokenParamsInterface {
 }
 
 export interface StreamTokensInterface {
-  getStreamTokens(filters: GetStreamTokenInterface): Promise<null>;
+  getStreamTokens(
+    filters: GetStreamTokenInterface
+  ): Promise<Array<StreamTokenInterface>>;
   getStreamToken(streamTokenId: id): Promise<StreamTokenInterface>;
   createStreamToken(
     streamToken: GetStreamTokenInterface

@@ -4,7 +4,7 @@ import { HttpClientInterface } from "./neuroio-rest-api/api-facade/auth";
 import sizeof from "object-sizeof";
 import { getFormDataSize } from "./utils";
 
-function getPayloadSize(payload: object | FormData): number {
+function getPayloadSize(payload: Record<string, unknown> | FormData): number {
   if (payload instanceof FormData) {
     return getFormDataSize(payload);
   } else {
@@ -17,7 +17,7 @@ const payloadIsTooLargeError = new Error("Payload is too large");
 // 6mb
 const MAX_PAYLOAD_SIZE = 6291456;
 
-function prepareUrlParams(params: { q?: string }): {} {
+function prepareUrlParams(params: { q?: string }): Record<string, unknown> {
   const paramsWithValues = removeEmpty(params);
 
   if (Object.prototype.hasOwnProperty.call(params, "q")) {
@@ -29,20 +29,23 @@ function prepareUrlParams(params: { q?: string }): {} {
   return !isEmpty(paramsWithValues) ? paramsWithValues : {};
 }
 
-type RequestData = FormData | {};
+type RequestData = FormData | Record<string, unknown>;
 
-type ResponseData = { data: {} };
+type ResponseData = { data: Record<string, unknown> };
 
 interface RequestClientInterface {
   defaults: { baseURL?: string; headers?: { Authorization?: string } };
-  get(url: string, config?: { params?: {} }): Promise<ResponseData>;
+  get(
+    url: string,
+    config?: { params?: Record<string, unknown> }
+  ): Promise<ResponseData>;
   post(url: string, data?: RequestData): Promise<ResponseData>;
   put(url: string, data?: RequestData): Promise<ResponseData>;
   delete(
     url: string,
     config?: {
-      params?: {};
-      data?: {};
+      params?: Record<string, unknown>;
+      data?: Record<string, unknown> | FormData;
     }
   ): Promise<ResponseData>;
 }
@@ -115,7 +118,7 @@ function createHttpClient({
       }
     }
 
-    post(url: string, data?: RequestData): Promise<null> {
+    post(url: string, data?: RequestData): Promise<Record<string, unknown>> {
       let preparedData = data;
 
       if (data && !(data instanceof FormData)) {
@@ -133,8 +136,11 @@ function createHttpClient({
       }
     }
 
-    get(url: string, params?: {}): Promise<null> {
-      const config: { params?: {} } = {};
+    get(
+      url: string,
+      params?: Record<string, unknown>
+    ): Promise<Record<string, unknown>> {
+      const config: { params?: Record<string, unknown> } = {};
 
       if (params) {
         config.params = prepareUrlParams(params);
@@ -147,7 +153,7 @@ function createHttpClient({
       }
     }
 
-    put(url: string, data?: RequestData): Promise<null> {
+    put(url: string, data?: RequestData): Promise<Record<string, unknown>> {
       let preparedData = data;
 
       if (data && !(data instanceof FormData)) {
@@ -161,8 +167,15 @@ function createHttpClient({
       return this.client.put(url, preparedData).then(({ data }) => data);
     }
 
-    delete(url: string, params?: {}, data?: RequestData): Promise<null> {
-      const config: { params?: {}; data?: {} } = {};
+    delete(
+      url: string,
+      params?: Record<string, unknown>,
+      data?: RequestData
+    ): Promise<Record<string, unknown>> {
+      const config: {
+        params?: Record<string, unknown>;
+        data?: Record<string, unknown> | FormData;
+      } = {};
 
       if (params) {
         config.params = prepareUrlParams(params);
