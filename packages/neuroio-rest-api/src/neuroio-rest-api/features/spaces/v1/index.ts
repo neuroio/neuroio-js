@@ -48,7 +48,7 @@ class Spaces extends AuthApi implements SpacesInterface {
     );
   }
 
-  deleteSpace(id: id): Promise<{}> {
+  deleteSpace(id: id): Promise<null> {
     return this.httpClient.delete(this.authURL + `${Spaces.apiEndpoint}${id}/`);
   }
 

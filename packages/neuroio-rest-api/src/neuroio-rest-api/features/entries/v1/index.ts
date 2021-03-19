@@ -60,7 +60,7 @@ class Entries extends Api implements EntriesInterface {
     return this.httpClient.get(`${Entries.apiEndpoint}stats/pid/${pid}/`);
   }
 
-  deleteEntry(entryId: id): Promise<{}> {
+  deleteEntry(entryId: id): Promise<null> {
     return this.httpClient.delete(`${Entries.apiEndpoint}${entryId}/`);
   }
 }

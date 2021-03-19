@@ -39,8 +39,8 @@ export interface SourcesFiltersInterface extends Paginatable, Searchable {
 }
 
 export interface SourcesInterface {
-  getSources(filters: SourcesFiltersInterface): Promise<{}>;
+  getSources(filters: SourcesFiltersInterface): Promise<null>;
   getSource(sourceId: id): Promise<SourceInterface>;
   createSource(source: SourceInterface): Promise<SourceInterface>;
-  deleteSource(sourceId: id): Promise<{}>;
+  deleteSource(sourceId: id): Promise<null>;
 }

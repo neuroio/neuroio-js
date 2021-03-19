@@ -76,7 +76,7 @@ export interface UtilitiesInterface {
     params: FindOutCustomerParamsInterface
   ): Promise<FindOutCustomerResponseInterface>;
 
-  getSupportedIdTypes(): Promise<{}>;
+  getSupportedIdTypes(): Promise<null>;
 
   getApiVersion(): Promise<GetApiVersionResponseInterface>;
 }

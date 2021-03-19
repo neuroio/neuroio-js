@@ -14,6 +14,7 @@ import { Spaces as SpacesV1 } from "./features/spaces/v1";
 import { Utilities as UtilitiesV1 } from "./features/utilities/v1";
 import { PersonsGroups as PersonsGroupsV1 } from "./features/persons-groups/v1";
 import { Thresholds as ThresholdsV1 } from "./features/thresholds/v1";
+import { StreamTokens as StreamTokensV1 } from "./features/stream-tokens/v1";
 
 import { apiEndpoints, apiVersions } from "../constants";
 
@@ -45,6 +46,7 @@ function createNeuroioRestApiV1({
     utilities: new UtilitiesV1({ httpClient }),
     personsGroups: new PersonsGroupsV1({ httpClient }),
     thresholds: new ThresholdsV1({ httpClient }),
+    streamTokens: new StreamTokensV1({ httpClient })
   });
 }
 

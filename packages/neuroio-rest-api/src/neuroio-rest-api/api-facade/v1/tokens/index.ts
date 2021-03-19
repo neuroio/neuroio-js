@@ -24,8 +24,9 @@ export interface UpdateTokenParamsInterface {
 
 export interface TokensInterface extends AuthApiInterface {
   getTokens(params: GetTokensParamsInterface): Promise<Array<TokenInterface>>;
+  getToken(id: id): Promise<TokenInterface>;
   createToken(params: GetTokenInterface): Promise<TokenInterface>;
   updateToken(params: UpdateTokenParamsInterface): Promise<TokenInterface>;
-  deleteToken(id: id): Promise<{}>;
-  deleteTokens(params: GetTokenInterface): Promise<{}>;
+  deleteToken(id: id): Promise<void>;
+  deleteTokens(params: GetTokenInterface): Promise<void>;
 }

@@ -102,7 +102,7 @@ class Utilities extends Api implements UtilitiesInterface {
     return this.httpClient.post("utility/compare/", { image });
   }
 
-  getSupportedIdTypes(): Promise<{}> {
+  getSupportedIdTypes(): Promise<null> {
     return this.httpClient.get("faceid/id-codes/");
   }
 

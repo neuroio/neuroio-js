@@ -33,7 +33,7 @@ export interface RemovePersonsFromPersonsGroupsParamsInterface {
 }
 
 export interface PersonsGroupsInterface {
-  getPersonsGroups(params: GetPersonsGroupsFiltersInterface): Promise<{}>;
+  getPersonsGroups(params: GetPersonsGroupsFiltersInterface): Promise<null>;
   getPersonsGroup(personsGroupId: id): Promise<PersonsGroupInterface>;
   createPersonsGroup(
     personsGroup: PersonsGroupInterface
@@ -41,14 +41,14 @@ export interface PersonsGroupsInterface {
   updatePersonsGroup(
     personsGroup: PersonsGroupInterface
   ): Promise<PersonsGroupInterface>;
-  deletePersonsGroup(personsGroupId: id): Promise<{}>;
+  deletePersonsGroup(personsGroupId: id): Promise<null>;
   getPersonsGroupPersons(
     filters: GetPersonsGroupPersonsFiltersInterface
-  ): Promise<{}>;
+  ): Promise<null>;
   addPersonsToPersonsGroups(
     params: AddPersonsToPersonsGroupsParamsInterface
-  ): Promise<{}>;
+  ): Promise<null>;
   removePersonsFromPersonsGroups(
     params: RemovePersonsFromPersonsGroupsParamsInterface
-  ): Promise<{}>;
+  ): Promise<null>;
 }

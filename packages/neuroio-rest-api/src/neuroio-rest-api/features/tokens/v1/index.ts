@@ -12,6 +12,7 @@ class Tokens extends AuthApi implements TokensInterface {
   constructor(settings: AuthApiSettingsInterface) {
     super(settings);
     this.getTokens = this.getTokens.bind(this);
+    this.getToken = this.getToken.bind(this);
     this.deleteTokens = this.deleteTokens.bind(this);
     this.createToken = this.createToken.bind(this);
     this.updateToken = this.updateToken.bind(this);
@@ -24,12 +25,16 @@ class Tokens extends AuthApi implements TokensInterface {
     return this.httpClient.get(this.authURL + Tokens.apiEndpoint, params);
   }
 
-  deleteTokens(data: GetTokenInterface): Promise<{}> {
+  deleteTokens(data: GetTokenInterface): Promise<void> {
     const { permanent } = data || {};
 
     return this.httpClient.delete(this.authURL + Tokens.apiEndpoint, {
       permanent,
     });
+  }
+
+  getToken(id: id): Promise<TokenInterface> {
+    return this.httpClient.get(this.authURL + `${Tokens.apiEndpoint}${id}/`);
   }
 
   createToken(data: GetTokenInterface): Promise<TokenInterface> {
@@ -48,7 +53,7 @@ class Tokens extends AuthApi implements TokensInterface {
     });
   }
 
-  deleteToken(id: id): Promise<{}> {
+  deleteToken(id: id): Promise<void> {
     return this.httpClient.delete(this.authURL + `${Tokens.apiEndpoint}${id}/`);
   }
 }

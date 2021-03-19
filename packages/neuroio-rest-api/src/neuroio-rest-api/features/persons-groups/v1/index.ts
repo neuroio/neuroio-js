@@ -31,7 +31,7 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
     name,
   });
 
-  getPersonsGroups(filters: GetPersonsGroupsFiltersInterface): Promise<{}> {
+  getPersonsGroups(filters: GetPersonsGroupsFiltersInterface): Promise<null> {
     const getFiltersData = ({
       q,
       limit,
@@ -78,7 +78,7 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
     );
   }
 
-  deletePersonsGroup(personGroupId: id): Promise<{}> {
+  deletePersonsGroup(personGroupId: id): Promise<null> {
     return this.httpClient.delete(
       `${PersonsGroups.apiEndpoint}${personGroupId}/`
     );
@@ -87,7 +87,7 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
   getPersonsGroupPersons({
     groupId,
     ...filters
-  }: GetPersonsGroupPersonsFiltersInterface = {}): Promise<{}> {
+  }: GetPersonsGroupPersonsFiltersInterface = {}): Promise<null> {
     const getFiltersData = ({
       limit,
       offset,
@@ -107,7 +107,7 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
   addPersonsToPersonsGroups({
     groupsIds,
     persons,
-  }: AddPersonsToPersonsGroupsParamsInterface = {}): Promise<{}> {
+  }: AddPersonsToPersonsGroupsParamsInterface = {}): Promise<null> {
     return this.httpClient.post(`${PersonsGroups.apiEndpoint}pids/`, {
       groups_ids: groupsIds,
       pids: persons,
@@ -117,7 +117,7 @@ class PersonsGroups extends Api implements PersonsGroupsInterface {
   removePersonsFromPersonsGroups({
     groupsIds,
     persons,
-  }: RemovePersonsFromPersonsGroupsParamsInterface = {}): Promise<{}> {
+  }: RemovePersonsFromPersonsGroupsParamsInterface = {}): Promise<null> {
     return this.httpClient.delete(`${PersonsGroups.apiEndpoint}pids/`, null, {
       groups_ids: groupsIds,
       pids: persons,

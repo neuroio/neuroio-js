@@ -31,10 +31,10 @@ export interface NotificationsFiltersInterface extends Paginatable, Searchable {
 }
 
 export interface NotificationsInterface {
-  getNotifications(filters: NotificationsFiltersInterface): Promise<{}>;
+  getNotifications(filters: NotificationsFiltersInterface): Promise<null>;
   getNotification(notificationId: id): Promise<NotificationInterface>;
   createNotification(
     notification: NotificationInterface
   ): Promise<NotificationInterface>;
-  deleteNotification(notificationId: id): Promise<{}>;
+  deleteNotification(notificationId: id): Promise<null>;
 }

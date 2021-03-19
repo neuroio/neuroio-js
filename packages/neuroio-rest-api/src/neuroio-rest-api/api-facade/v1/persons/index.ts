@@ -50,12 +50,12 @@ export interface PersonsInterface {
   ): Promise<PersonResponseIterface>;
   createPersonFromEntry(
     person: CreatePersonFromEntryParamsInterface
-  ): Promise<{}>;
-  deletePerson(pid: string): Promise<{}>;
+  ): Promise<null>;
+  deletePerson(pid: string): Promise<null>;
   reinitializePersonByEntry(
     params: ReinitializePersonByEntryParamsInterface
-  ): Promise<{}>;
+  ): Promise<null>;
   reinitializePersonByImage(
     params: ReinitializePersonByImageParamsInterface
-  ): Promise<{}>;
+  ): Promise<null>;
 }

@@ -66,7 +66,7 @@ class Persons extends Api implements PersonsInterface {
     entryId,
     create_on_ha,
     create_on_junk,
-  }: CreatePersonFromEntryParamsInterface): Promise<{}> {
+  }: CreatePersonFromEntryParamsInterface): Promise<null> {
     return this.httpClient.post(`${Persons.apiEndpoint}entry/`, {
       id: entryId,
       create_on_ha,
@@ -74,13 +74,13 @@ class Persons extends Api implements PersonsInterface {
     });
   }
 
-  deletePerson(pid: string): Promise<{}> {
+  deletePerson(pid: string): Promise<null> {
     return this.httpClient.delete(`${Persons.apiEndpoint}${pid}/`);
   }
 
   reinitializePersonByEntry({
     entryId,
-  }: ReinitializePersonByEntryParamsInterface): Promise<{}> {
+  }: ReinitializePersonByEntryParamsInterface): Promise<null> {
     if (!entryId) return Promise.reject("No entry id provided");
 
     return this.httpClient.post(`${Persons.apiEndpoint}reinit/`, {
@@ -94,7 +94,7 @@ class Persons extends Api implements PersonsInterface {
     source,
     facesize,
     result,
-  }: ReinitializePersonByImageParamsInterface): Promise<{}> {
+  }: ReinitializePersonByImageParamsInterface): Promise<null> {
     if (!image) return Promise.reject("No image provided");
 
     const fieldsData = { source, facesize, result };

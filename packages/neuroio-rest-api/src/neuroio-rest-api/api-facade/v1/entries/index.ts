@@ -83,5 +83,5 @@ export interface EntriesStatsInterface {
 export interface EntriesInterface {
   getEntries(filters: EntriesFiltersInterface): Promise<Array<EntryInterface>>;
   getEntriesStatsByPersonId(pid: string): Promise<EntriesStatsInterface>;
-  deleteEntry(entryId: id): Promise<{}>;
+  deleteEntry(entryId: id): Promise<null>;
 }

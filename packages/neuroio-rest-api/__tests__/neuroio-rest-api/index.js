@@ -18,6 +18,7 @@ import { Sources as SourcesV1 } from "../../src/neuroio-rest-api/features/source
 import { Utilities as UtilitiesV1 } from "../../src/neuroio-rest-api/features/utilities/v1";
 import { Persons as PersonsV1 } from "../../src/neuroio-rest-api/features/persons/v1";
 import { Thresholds as ThresholdsV1 } from "../../src/neuroio-rest-api/features/thresholds/v1";
+import { StreamTokens as StreamTokensV1 } from "../../src/neuroio-rest-api/features/stream-tokens/v1";
 
 jest.mock("axios");
 jest.mock("form-data");
@@ -59,6 +60,7 @@ describe("NeuroioApi test", () => {
     sources: new SourcesV1({ httpClient }),
     utilities: new UtilitiesV1({ httpClient }),
     thresholds: new ThresholdsV1({ httpClient }),
+    streamTokens: new StreamTokensV1({ httpClient }),
   });
 
   let thenFn;
@@ -249,6 +251,83 @@ describe("NeuroioApi test", () => {
       api.tokens.deleteTokens(reqParams).then(thenFn);
 
       expect(axios.delete).toHaveBeenCalledWith(authEndpoint + "tokens/", {
+        params: reqParams,
+      });
+    });
+  });
+
+  describe("StreamTokens module test", () => {
+    const streamTokenMock = {
+      key: "token_key",
+      id: 0,
+      is_active: true,
+      created: "2019-07-29T13:53:27.306Z",
+      expires: "2020-07-29T13:53:27.306Z",
+    };
+
+    test("getStreamTokens: should return correct array of streamTokens", () => {
+      const mockedStreamTokens = [streamTokenMock];
+      const reqParams = {
+        permanent: false,
+        limit: 20,
+        offset: 10,
+      };
+
+      api.streamTokens.getStreamTokens(reqParams).then(thenFn);
+
+      expect(axios.get).toHaveBeenCalledWith("streams/tokens/", {
+        params: reqParams,
+      });
+
+      axios.mockResponse({ data: mockedStreamTokens });
+
+      expect(thenFn).toHaveBeenCalledWith(mockedStreamTokens);
+    });
+
+    test("createStreamToken: should send POST request with correct data", () => {
+      const reqData = {
+        permanent: true,
+      };
+
+      api.streamTokens.createStreamToken(reqData).then(thenFn);
+
+      expect(axios.post).toHaveBeenCalledWith("streams/tokens/", reqData);
+
+      axios.mockResponse({ data: streamTokenMock });
+
+      expect(thenFn).toHaveBeenCalledWith(streamTokenMock);
+    });
+
+    test("updateStreamToken: should send PUT request with correct data", () => {
+      const reqData = { id: 1, is_active: false };
+
+      api.streamTokens.updateStreamToken(reqData).then(thenFn);
+
+      expect(axios.put).toHaveBeenCalledWith(`streams/tokens/${reqData.id}/`, {
+        is_active: reqData.is_active,
+      });
+
+      axios.mockResponse({ data: streamTokenMock });
+
+      expect(thenFn).toHaveBeenCalledWith(streamTokenMock);
+    });
+
+    test("deleteStreamToken: should send DELETE request with correct data", () => {
+      const streamTokenId = 1;
+
+      api.streamTokens.deleteStreamToken(streamTokenId).then(thenFn);
+
+      expect(axios.delete).toHaveBeenCalledWith(
+        `streams/tokens/${streamTokenId}/`
+      );
+    });
+
+    test("deleteStreamTokens: should send DELETE request with correct data", () => {
+      const reqParams = { permanent: true };
+
+      api.streamTokens.deleteStreamTokens(reqParams).then(thenFn);
+
+      expect(axios.delete).toHaveBeenCalledWith("streams/tokens/", {
         params: reqParams,
       });
     });

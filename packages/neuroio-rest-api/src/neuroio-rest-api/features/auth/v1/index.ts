@@ -24,7 +24,7 @@ class Auth extends AuthApi implements AuthInterface {
       }));
   }
 
-  logout(tokenId: string): Promise<{}> {
+  logout(tokenId: string): Promise<null> {
     return this.httpClient.delete(this.authURL + `tokens/${tokenId}/`);
   }
 
@@ -32,7 +32,7 @@ class Auth extends AuthApi implements AuthInterface {
     return this.httpClient.get(this.authURL + "whoami/");
   }
 
-  changePassword(data: ChangeUserPasswordInterface): Promise<{}> {
+  changePassword(data: ChangeUserPasswordInterface): Promise<null> {
     return this.httpClient.post(this.authURL + "auth/password/change/", data);
   }
 }

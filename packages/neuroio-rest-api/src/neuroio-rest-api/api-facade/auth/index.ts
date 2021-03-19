@@ -21,9 +21,9 @@ export interface ChangeUserPasswordInterface {
 
 export interface AuthInterface extends AuthApiInterface {
   login(username: string, password: string): Promise<LoginUserInterface>;
-  logout(tokenId: string): Promise<{}>;
+  logout(tokenId: string): Promise<null>;
   whoami(): Promise<UserInterface>;
-  changePassword(data: ChangeUserPasswordInterface): Promise<{}>;
+  changePassword(data: ChangeUserPasswordInterface): Promise<null>;
 }
 
 // _________

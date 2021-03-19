@@ -14,6 +14,7 @@ import { SourcesInterface } from "./sources";
 import { UtilitiesInterface } from "./utilities";
 import { PersonsGroupsInterface } from "./persons-groups";
 import { ThresholdsClassInterface } from "./thresholds";
+import { StreamTokensInterface } from "./stream-tokens";
 
 interface ApiFacadeV1SettingsInterface extends ApiFacadeSettingsInterface {
   tokens: TokensInterface;
@@ -26,6 +27,7 @@ interface ApiFacadeV1SettingsInterface extends ApiFacadeSettingsInterface {
   utilities: UtilitiesInterface;
   personsGroups: PersonsGroupsInterface;
   thresholds: ThresholdsClassInterface;
+  streamTokens: StreamTokensInterface;
 }
 
 export interface ApiFacadeV1Interface extends ApiFacadeInterface {
@@ -39,6 +41,7 @@ export interface ApiFacadeV1Interface extends ApiFacadeInterface {
   utilities: UtilitiesInterface;
   personsGroups: PersonsGroupsInterface;
   thresholds: ThresholdsClassInterface;
+  streamTokens: StreamTokensInterface;
 }
 
 class ApiFacadeV1 extends ApiFacade {
@@ -52,6 +55,7 @@ class ApiFacadeV1 extends ApiFacade {
   utilities: UtilitiesInterface;
   personsGroups: PersonsGroupsInterface;
   thresholds: ThresholdsClassInterface;
+  streamTokens: StreamTokensInterface;
 
   constructor({
     httpClient,
@@ -65,6 +69,7 @@ class ApiFacadeV1 extends ApiFacade {
     utilities,
     personsGroups,
     thresholds,
+    streamTokens,
   }: ApiFacadeV1SettingsInterface) {
     super({
       auth,
@@ -81,9 +86,10 @@ class ApiFacadeV1 extends ApiFacade {
     this.utilities = utilities;
     this.personsGroups = personsGroups;
     this.thresholds = thresholds;
+    this.streamTokens = streamTokens;
   }
 
-  setEndpoint(endpoint: EndpointInterface) {
+  setEndpoint(endpoint: EndpointInterface): void {
     super.setEndpoint(endpoint);
     this.tokens.setAuthURL(endpoint.auth);
     this.spaces.setAuthURL(endpoint.auth);

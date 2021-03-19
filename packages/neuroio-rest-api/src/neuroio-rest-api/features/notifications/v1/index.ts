@@ -47,7 +47,7 @@ class Notifications extends Api implements NotificationsInterface {
     liveness,
   });
 
-  getNotifications(filters: NotificationsFiltersInterface = {}): Promise<{}> {
+  getNotifications(filters: NotificationsFiltersInterface = {}): Promise<null> {
     const getFiltersData = ({
       q,
       limit,
@@ -90,7 +90,7 @@ class Notifications extends Api implements NotificationsInterface {
     );
   }
 
-  deleteNotification(notificationId: id): Promise<{}> {
+  deleteNotification(notificationId: id): Promise<null> {
     return this.httpClient.delete(
       `${Notifications.apiEndpoint}${notificationId}/`
     );

@@ -10,6 +10,7 @@ import { Notifications as NotificationsV1 } from "../src/neuroio-rest-api/featur
 import { Sources as SourcesV1 } from "../src/neuroio-rest-api/features/sources/v1";
 import { Utilities as UtilitiesV1 } from "../src/neuroio-rest-api/features/utilities/v1";
 import { Persons as PersonsV1 } from "../src/neuroio-rest-api/features/persons/v1";
+import { StreamTokens as StreamTokensV1 } from "../src/neuroio-rest-api/features/stream-tokens/v1";
 
 describe("createNeuroioRestApi test", () => {
   const mockedToken = "token";
@@ -57,5 +58,6 @@ describe("createNeuroioRestApi test", () => {
     expect(NeuroioRestApiInstanse.sources).toBeInstanceOf(SourcesV1);
     expect(NeuroioRestApiInstanse.utilities).toBeInstanceOf(UtilitiesV1);
     expect(NeuroioRestApiInstanse.persons).toBeInstanceOf(PersonsV1);
+    expect(NeuroioRestApiInstanse.streamTokens).toBeInstanceOf(StreamTokensV1);
   });
 });

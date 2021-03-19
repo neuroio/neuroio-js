@@ -66,7 +66,7 @@ class Sources extends Api implements SourcesInterface {
     license_type,
   });
 
-  getSources(filters: SourcesFiltersInterface = {}): Promise<{}> {
+  getSources(filters: SourcesFiltersInterface = {}): Promise<null> {
     const getFiltersData = ({
       q,
       limit,
@@ -102,7 +102,7 @@ class Sources extends Api implements SourcesInterface {
     );
   }
 
-  deleteSource(sourceId: id): Promise<{}> {
+  deleteSource(sourceId: id): Promise<null> {
     return this.httpClient.delete(`${Sources.apiEndpoint}${sourceId}/`);
   }
 }

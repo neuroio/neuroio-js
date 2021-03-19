@@ -22,6 +22,6 @@ export interface SpacesInterface extends AuthApiInterface {
   getSpace(id: id): Promise<SpaceInterface>;
   createSpace(data: SpaceDataInterface): Promise<SpaceInterface>;
   updateSpace(data: SpaceInterface): Promise<SpaceInterface>;
-  deleteSpace(id: id): Promise<{}>;
+  deleteSpace(id: id): Promise<null>;
   createToken(data: CreateSpaceTokenInterface): Promise<TokenInterface>;
 }

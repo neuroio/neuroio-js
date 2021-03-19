@@ -115,7 +115,7 @@ function createHttpClient({
       }
     }
 
-    post(url: string, data?: RequestData): Promise<{}> {
+    post(url: string, data?: RequestData): Promise<null> {
       let preparedData = data;
 
       if (data && !(data instanceof FormData)) {
@@ -133,7 +133,7 @@ function createHttpClient({
       }
     }
 
-    get(url: string, params?: {}): Promise<{}> {
+    get(url: string, params?: {}): Promise<null> {
       const config: { params?: {} } = {};
 
       if (params) {
@@ -147,7 +147,7 @@ function createHttpClient({
       }
     }
 
-    put(url: string, data?: RequestData): Promise<{}> {
+    put(url: string, data?: RequestData): Promise<null> {
       let preparedData = data;
 
       if (data && !(data instanceof FormData)) {
@@ -161,7 +161,7 @@ function createHttpClient({
       return this.client.put(url, preparedData).then(({ data }) => data);
     }
 
-    delete(url: string, params?: {}, data?: RequestData): Promise<{}> {
+    delete(url: string, params?: {}, data?: RequestData): Promise<null> {
       const config: { params?: {}; data?: {} } = {};
 
       if (params) {
