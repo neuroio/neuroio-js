@@ -1,20 +1,5 @@
 module.exports = {
-  env: {
-    browser: true,
-    commonjs: true,
-    es6: true,
-    node: true,
-    jest: true,
-  },
-  extends: ["eslint:recommended", "prettier", "plugin:jest/recommended"],
-  plugins: ["prettier", "jest"],
-  parser: "babel-eslint",
-  parserOptions: {
-    sourceType: "module",
-    ecmaFeatures: {
-      modules: true,
-    },
-  },
+  extends: "../../.eslintrc.js",
   overrides: [
     {
       files: ["*.ts"],
