@@ -15,6 +15,7 @@
     "format": "npm run prettier -- --write",
     "install:all": "npm install --prefix packages/neuroio-rest-api && npm install --prefix packages/neuroio-websocket && npm install",
     "ci:all": "npm ci --prefix packages/neuroio-rest-api && npm ci --prefix packages/neuroio-websocket && npm ci",
+    "test": "npm run test:all",
     "test:all": "npm test --prefix packages/neuroio-rest-api && npm test --prefix packages/neuroio-websocket",
     "validate": "npm run lint && npm run test:all && npm run prettier -- --list-different",
     "docs:serve": "docsify serve ./docs"
