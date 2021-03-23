@@ -19,6 +19,26 @@ token.then((token) => {
 });
 ```
 
+## Get stream auth token
+
+```js
+import { createNeuroioRestApi } from "@neuroio/api";
+
+const NeuroioRestApi = createNeuroioRestApi({
+  version: 1,
+  token: NEUROIO_TOKEN,
+});
+
+const tokenId = 1;
+
+const token = NeuroioRestApi.streamTokens.getStreamToken(tokenId);
+
+token.then((token) => {
+  console.log({ token });
+});
+```
+
+
 ## Activate/Deactivate token
 
 ```js

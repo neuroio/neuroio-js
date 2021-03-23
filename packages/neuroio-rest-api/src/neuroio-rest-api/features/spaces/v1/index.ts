@@ -22,7 +22,7 @@ class Spaces extends AuthApi implements SpacesInterface {
 
   static apiEndpoint = "spaces/";
 
-  static getSpaceData = ({ name }: SpaceDataInterface): {} => ({
+  static getSpaceData = ({ name }: SpaceDataInterface): { name: string } => ({
     name,
   });
 

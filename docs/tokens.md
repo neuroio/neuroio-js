@@ -9,7 +9,10 @@
 ## Create user auth token
 
 [Neuroio API](https://kb.neuroio.com/#/authorization?id=token-generation)
+
 [how to create space token](./spaces.md#create-space-auth-token)
+
+[how to create stream token](./stream-tokens.md#create-stream-auth-token)
 
 ```js
 import { createNeuroioRestApi } from "@neuroio/api";
@@ -22,6 +25,25 @@ const NeuroioRestApi = createNeuroioRestApi({
 const token = NeuroioRestApi.tokens.createToken({
   permanent: true,
 });
+
+token.then((token) => {
+  console.log({ token });
+});
+```
+
+## Get user auth token
+
+```js
+import { createNeuroioRestApi } from "@neuroio/api";
+
+const NeuroioRestApi = createNeuroioRestApi({
+  version: 1,
+  token: NEUROIO_TOKEN,
+});
+
+const tokenId = 1;
+
+const token = NeuroioRestApi.tokens.getToken(tokenId);
 
 token.then((token) => {
   console.log({ token });

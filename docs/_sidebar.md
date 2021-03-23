@@ -7,6 +7,7 @@
 
   - [Authorization](authorization.md)
   - [Tokens](tokens.md)
+  - [Stream Tokens](stream-tokens.md)
   - [Spaces](spaces.md)
 
   - [Sources](sources.md)
