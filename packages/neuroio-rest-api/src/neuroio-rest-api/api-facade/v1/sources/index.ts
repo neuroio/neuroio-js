@@ -1,5 +1,4 @@
 import { Result, Paginatable, Searchable, id } from "../../../../base/types";
-import { License } from "./types";
 
 export interface SourceInterface {
   // General
@@ -7,7 +6,8 @@ export interface SourceInterface {
   // read only
   space_id?: id;
   name?: string;
-  license_type?: License;
+  license_id?: id;
+  license?: Record<string, unknown>;
   identify_facesize_threshold?: number;
   use_pps_timestamp?: boolean;
 

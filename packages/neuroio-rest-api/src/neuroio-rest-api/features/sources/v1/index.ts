@@ -40,7 +40,8 @@ class Sources extends Api implements SourcesInterface {
     auto_identify_asm,
 
     store_images_for_results,
-    license_type,
+    license_id,
+    license,
   }: SourceInterface = {}): {} => ({
     name,
     identify_facesize_threshold,
@@ -63,7 +64,8 @@ class Sources extends Api implements SourcesInterface {
     auto_identify_asm,
 
     store_images_for_results,
-    license_type,
+    license_id,
+    license,
   });
 
   getSources(filters: SourcesFiltersInterface = {}): Promise<null> {
@@ -93,9 +95,10 @@ class Sources extends Api implements SourcesInterface {
     );
   }
 
-  updateSource({ id, ...restData }: SourceInterface = {}): Promise<
-    SourceInterface
-  > {
+  updateSource({
+    id,
+    ...restData
+  }: SourceInterface = {}): Promise<SourceInterface> {
     return this.httpClient.put(
       `${Sources.apiEndpoint}${id}/`,
       Sources.getSourceData(restData)
