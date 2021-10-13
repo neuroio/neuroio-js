@@ -1,6 +1,6 @@
 {
   "name": "@neuroio/api",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "description": "Library for work with Neuroio API",
   "source": "index.js",
   "main": "./dist/NeuroioApi.node.js",
