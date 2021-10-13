@@ -9,6 +9,7 @@
   - [Tokens](tokens.md)
   - [Stream Tokens](stream-tokens.md)
   - [Spaces](spaces.md)
+  - [Licenses](licenses.md)
 
   - [Sources](sources.md)
   - [Entries](entries.md)
