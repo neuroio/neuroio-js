@@ -17,7 +17,7 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "isomorphic-form-data": "^2.0.0",
     "object-sizeof": "^1.6.1",
     "qs": "^6.10.1"
