@@ -7,6 +7,7 @@ export interface SourceInterface {
   space_id?: id;
   name?: string;
   license_id?: id;
+  license?: Record<string, unknown>;
   identify_facesize_threshold?: number;
   use_pps_timestamp?: boolean;
 

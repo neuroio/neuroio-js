@@ -41,6 +41,7 @@ class Sources extends Api implements SourcesInterface {
 
     store_images_for_results,
     license_id,
+    license,
   }: SourceInterface = {}): {} => ({
     name,
     identify_facesize_threshold,
@@ -64,6 +65,7 @@ class Sources extends Api implements SourcesInterface {
 
     store_images_for_results,
     license_id,
+    license,
   });
 
   getSources(filters: SourcesFiltersInterface = {}): Promise<null> {
