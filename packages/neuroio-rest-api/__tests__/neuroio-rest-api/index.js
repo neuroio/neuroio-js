@@ -19,6 +19,7 @@ import { Utilities as UtilitiesV1 } from "../../src/neuroio-rest-api/features/ut
 import { Persons as PersonsV1 } from "../../src/neuroio-rest-api/features/persons/v1";
 import { Thresholds as ThresholdsV1 } from "../../src/neuroio-rest-api/features/thresholds/v1";
 import { StreamTokens as StreamTokensV1 } from "../../src/neuroio-rest-api/features/stream-tokens/v1";
+import { Licenses as LicensesV1 } from "../../src/neuroio-rest-api/features/licenses/v1";
 
 jest.mock("axios");
 jest.mock("form-data");
@@ -54,6 +55,7 @@ describe("NeuroioApi test", () => {
     auth: new AuthV1({ httpClient, authURL: authEndpoint }),
     tokens: new TokensV1({ httpClient, authURL: authEndpoint }),
     spaces: new SpacesV1({ httpClient, authURL: authEndpoint }),
+    licenses: new LicensesV1({ httpClient, authURL: authEndpoint }),
     notifications: new NotificationsV1({ httpClient }),
     entries: new EntriesV1({ httpClient }),
     persons: new PersonsV1({ httpClient }),
@@ -647,7 +649,7 @@ describe("NeuroioApi test", () => {
       expect(thenFn).toHaveBeenCalledWith(mockedSources);
     });
 
-    test("createSource: should send POST request with correct data", () => {
+    test("createLicense: should send POST request with correct data", () => {
       api.sources.createSource(mockedSource).then(thenFn);
 
       expect(axios.post).toHaveBeenCalledWith("sources/", mockedSource);
@@ -665,7 +667,7 @@ describe("NeuroioApi test", () => {
       expect(thenFn).toHaveBeenCalledWith(mockedSource);
     });
 
-    test("updateSource: should send PUT request with correct data", () => {
+    test("updateLicense: should send PUT request with correct data", () => {
       const sourceId = 1;
 
       api.sources.updateSource({ id: sourceId, ...mockedSource }).then(thenFn);
@@ -680,7 +682,7 @@ describe("NeuroioApi test", () => {
       expect(thenFn).toHaveBeenCalledWith(mockedSource);
     });
 
-    test("deleteSource: should send DELETE request with correct data", () => {
+    test("deleteLicense: should send DELETE request with correct data", () => {
       const sourceId = 1;
 
       api.sources.deleteSource(sourceId).then(thenFn);
@@ -710,7 +712,7 @@ describe("NeuroioApi test", () => {
       expect(thenFn).toHaveBeenCalledWith(mockedSpaces);
     });
 
-    test("createSpace: should send POST request with correct data", () => {
+    test("createLicense: should send POST request with correct data", () => {
       const reqData = { name: mockedSpace.name };
 
       api.spaces.createSpace(reqData).then(thenFn);
@@ -735,7 +737,7 @@ describe("NeuroioApi test", () => {
       expect(thenFn).toHaveBeenCalledWith(mockedSpace);
     });
 
-    test("updateSpace: should send PUT request with correct data", () => {
+    test("updateLicense: should send PUT request with correct data", () => {
       const reqId = mockedSpace.id;
       const reqData = { name: mockedSpace.name };
 
@@ -751,13 +753,105 @@ describe("NeuroioApi test", () => {
       expect(thenFn).toHaveBeenCalledWith(mockedSpace);
     });
 
-    test("deleteSpace: should send DELETE request with correct data", () => {
+    test("deleteLicense: should send DELETE request with correct data", () => {
       const spaceId = 1;
 
       api.spaces.deleteSpace(spaceId).then(thenFn);
 
       expect(axios.delete).toHaveBeenCalledWith(
         authEndpoint + `spaces/${spaceId}/`
+      );
+    });
+  });
+
+  describe("Licenses module test", () => {
+    const mockedLicense = {
+      id: 0,
+      name: "My new awesome license",
+      created: "2019-07-29T13:53:27.306Z",
+      unavailable_at: "2018-07-29T13:53:27.306Z",
+      entry_storage_days: 10,
+      is_active: false,
+    };
+
+    test("getLicenses: should return correct array of licenses", () => {
+      const mockedLicenses = [mockedLicense];
+      const reqParams = {
+        limit: 20,
+        offset: 0,
+        q: "some q",
+        date_from: "2019-06-29T13:53:27.306Z",
+        date_to: "2019-07-29T13:53:27.306Z",
+      };
+
+      api.licenses.getLicenses(reqParams).then(thenFn);
+
+      expect(axios.get).toHaveBeenCalledWith(
+        authEndpoint + "licenses/sources/",
+        {
+          params: reqParams,
+        }
+      );
+
+      axios.mockResponse({ data: mockedLicenses });
+
+      expect(thenFn).toHaveBeenCalledWith(mockedLicenses);
+    });
+
+    test("createLicense: should send POST request with correct data", () => {
+      const reqData = {
+        name: mockedLicense.name,
+        entry_storage_days: mockedLicense.entry_storage_days,
+      };
+
+      api.licenses.createLicense(reqData).then(thenFn);
+
+      expect(axios.post).toHaveBeenCalledWith(
+        authEndpoint + "licenses/sources/",
+        reqData
+      );
+    });
+
+    test("getLicense: should return correct license object", () => {
+      const licenseId = 1;
+
+      api.licenses.getLicense(licenseId).then(thenFn);
+
+      expect(axios.get).toHaveBeenCalledWith(
+        authEndpoint + `licenses/sources/${licenseId}/`
+      );
+
+      axios.mockResponse({ data: mockedLicense });
+
+      expect(thenFn).toHaveBeenCalledWith(mockedLicense);
+    });
+
+    test("updateLicense: should send PUT request with correct data", () => {
+      const reqId = mockedLicense.id;
+      const reqData = {
+        name: mockedLicense.name,
+        is_active: !mockedLicense.is_active,
+      };
+
+      api.licenses.updateLicense({ id: reqId, ...reqData }).then(thenFn);
+
+      expect(axios.put).toHaveBeenCalledWith(
+        authEndpoint + `licenses/sources/${reqId}/`,
+        reqData
+      );
+
+      axios.mockResponse({ data: mockedLicense });
+
+      expect(thenFn).toHaveBeenCalledWith(mockedLicense);
+    });
+
+    test("deleteLicense: should send DELETE request with correct data", () => {
+      const licenseId = 1;
+
+      api.licenses.deleteLicense(licenseId).then(thenFn);
+
+      expect(axios.delete).toHaveBeenCalledWith(
+        authEndpoint + `licenses/sources/${licenseId}/`
       );
     });
   });

@@ -15,10 +15,12 @@ import { UtilitiesInterface } from "./utilities";
 import { PersonsGroupsInterface } from "./persons-groups";
 import { ThresholdsClassInterface } from "./thresholds";
 import { StreamTokensInterface } from "./stream-tokens";
+import { LicensesInterface } from "./licenses";
 
 interface ApiFacadeV1SettingsInterface extends ApiFacadeSettingsInterface {
   tokens: TokensInterface;
   spaces: SpacesInterface;
+  licenses: LicensesInterface;
 
   notifications: NotificationsInterface;
   entries: EntriesInterface;
@@ -33,6 +35,7 @@ interface ApiFacadeV1SettingsInterface extends ApiFacadeSettingsInterface {
 export interface ApiFacadeV1Interface extends ApiFacadeInterface {
   tokens: TokensInterface;
   spaces: SpacesInterface;
+  licenses: LicensesInterface;
 
   notifications: NotificationsInterface;
   entries: EntriesInterface;
@@ -47,6 +50,7 @@ export interface ApiFacadeV1Interface extends ApiFacadeInterface {
 class ApiFacadeV1 extends ApiFacade {
   tokens: TokensInterface;
   spaces: SpacesInterface;
+  licenses: LicensesInterface;
 
   notifications: NotificationsInterface;
   entries: EntriesInterface;
@@ -62,6 +66,7 @@ class ApiFacadeV1 extends ApiFacade {
     auth,
     tokens,
     spaces,
+    licenses,
     notifications,
     entries,
     persons,
@@ -78,6 +83,7 @@ class ApiFacadeV1 extends ApiFacade {
 
     this.tokens = tokens;
     this.spaces = spaces;
+    this.licenses = licenses;
 
     this.notifications = notifications;
     this.entries = entries;
@@ -93,6 +99,7 @@ class ApiFacadeV1 extends ApiFacade {
     super.setEndpoint(endpoint);
     this.tokens.setAuthURL(endpoint.auth);
     this.spaces.setAuthURL(endpoint.auth);
+    this.licenses.setAuthURL(endpoint.auth);
   }
 }
 
